@@ -10,19 +10,21 @@ import warnings.WarningDB;
 public class UI extends Thread {
 
 	public static void main(String[] args) throws IOException {
+		UI ui = new UI();
 		Utilidades.writeFiles();
 
+		ui.start();
+
 	}
-	
+
 	@Override
 	public void run() {
 		WarningDB wdb = null;
 		
 		Scanner sc = new Scanner(System.in);
-		String input = sc.nextLine();
+		String input;
 
-		while( !input.equals("q") ) {
-
+		do {
 			System.out.println(Messages.WELCOME);
 			System.out.println(Messages.OPT1);
 			System.out.println(Messages.OPT2);
@@ -51,7 +53,6 @@ public class UI extends Thread {
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
 				} catch (IOException e) {
-					System.err.println("Não foi possível criar o aviso.");
 					e.printStackTrace();
 				}
 				
@@ -64,7 +65,6 @@ public class UI extends Thread {
 				try {
 					Utilidades.deleteWarning(mensagem);
 				} catch (IOException e) {
-					System.err.println("Não foi possível apagar o aviso.");
 					e.printStackTrace();
 				}
 			} else if (Integer.parseInt(input) == 3) { // Criar novo contacto
@@ -76,7 +76,11 @@ public class UI extends Thread {
 				System.out.println(Messages.TEL_CONTACTO);
 				numContacto = sc3.nextLine();
 				
-				//TODO: registar contacto
+				try {
+					Utilidades.writeContacto(nomeContacto, numContacto);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			} else if (Integer.parseInt(input) == 4) { // Criar padrão de inatividade
 				Scanner sc4 = new Scanner(System.in);
 			} else if (Integer.parseInt(input) == 5) { // Criar padrão de atividade
@@ -85,12 +89,6 @@ public class UI extends Thread {
 				Scanner sc6 = new Scanner(System.in);
 			}
 
-		}
-
-
+		} while( !sc.nextLine().equals("q"));
 	}
-	
 }
-
-
-
