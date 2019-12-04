@@ -9,24 +9,14 @@ import warnings.WarningDB;
 
 public class UI extends Thread {
 
-
-
-
-
 	public static void main(String[] args) throws IOException {
 		Utilidades.writeFiles();
 
 	}
-
 	
 	@Override
 	public void run() {
 		WarningDB wdb = null;
-		try {
-			wdb = new WarningDB();
-		} catch (ClassNotFoundException e1) {
-			System.err.println(e1.printStackTrace());
-		}
 		
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
@@ -40,33 +30,65 @@ public class UI extends Thread {
 			System.out.println(Messages.OPT4);
 			System.out.println(Messages.OPT5);
 			System.out.println(Messages.OPT6);
-			System.out.println(Messages.OPT7);
 			input = sc.nextLine();
 			
 			if(Integer.parseInt(input) == 1) { // Criar aviso
 				Scanner sc1 = new Scanner(System.in);
+				String mensagem, dataInicio, dataFim, periodicidade;
 				
+				System.out.println(Messages.MENSAGEM_AVISO);
+				mensagem = sc1.nextLine();
+				System.out.println(Messages.DATA_INICIO_AVISO);
+				dataInicio = sc1.nextLine();
+				System.out.println(Messages.DATA_FIM_AVISO);
+				dataFim = sc1.nextLine();
+				System.out.println(Messages.PERIODICIDADE_AVISO);
+				periodicidade = sc1.nextLine();
 				
-			} else if (Integer.parseInt(input) == 2) {
+				String horaInicio = dataInicio.substring(11); // inicio da hora na string dataInicio
+				String horaFim = dataFim.substring(11); // inicio da hora na string dataInicio
 				
-			} else if (Integer.parseInt(input) == 3) {
+				try {
+					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
+				} catch (IOException e) {
+					System.err.println("Não foi possível criar o aviso.");
+					e.printStackTrace();
+				}
 				
-			} else if (Integer.parseInt(input) == 4) {
+			} else if (Integer.parseInt(input) == 2) { // Apagar aviso
+				Scanner sc2 = new Scanner (System.in);
+				String mensagem;
+				System.out.println(Messages.MENSAGEM_AVISO);
+				mensagem = sc2.nextLine();
 				
-			} else if (Integer.parseInt(input) == 5) {
+				try {
+					Utilidades.deleteWarning(mensagem);
+				} catch (IOException e) {
+					System.err.println("Não foi possível apagar o aviso.");
+					e.printStackTrace();
+				}
+			} else if (Integer.parseInt(input) == 3) { // Criar novo contacto
+				Scanner sc3 = new Scanner (System.in);
+				String nomeContacto, numContacto;
 				
-			} else if (Integer.parseInt(input) == 6) {
+				System.out.println(Messages.NOME_CONTACTO);
+				nomeContacto = sc3.nextLine();
+				System.out.println(Messages.TEL_CONTACTO);
+				numContacto = sc3.nextLine();
 				
+				//TODO: registar contacto
+			} else if (Integer.parseInt(input) == 4) { // Criar padrão de inatividade
+				Scanner sc4 = new Scanner(System.in);
+			} else if (Integer.parseInt(input) == 5) { // Criar padrão de atividade
+				Scanner sc5 = new Scanner(System.in);
+			} else if (Integer.parseInt(input) == 6) { // Simular evento de inatividade
+				Scanner sc6 = new Scanner(System.in);
 			}
 
 		}
 
 
 	}
-
-
-
-
 	
 }
 
