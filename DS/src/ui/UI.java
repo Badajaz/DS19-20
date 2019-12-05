@@ -99,13 +99,30 @@ public class UI extends Thread {
 
 				try {
 					Utilidades.writePadraoInatividade(duracao, horaInicio, horaFim);
-					System.out.println("Padrao de Inatividade registado com sucesso!");
+					System.out.println("Padrao de inatividade registado com sucesso!");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 			} else if (Integer.parseInt(input) == 5) { // Criar padrao de atividade
 				Scanner sc5 = new Scanner(System.in);
+
+				String divisao, horaInicio, horaFim;
+				System.out.println(Messages.DIVISAO_ATIVIDADE);
+				divisao = sc5.nextLine();
+				System.out.println(Messages.HORA_INICIAL);
+				horaInicio = sc5.nextLine();
+				System.out.println(Messages.HORA_FINAL);
+				horaFim = sc5.nextLine();
+
+				try {
+					if (Utilidades.checkHour(horaInicio) && Utilidades.checkHour(horaFim)) {
+						Utilidades.writePadraoAtividade(divisao, horaInicio, horaFim);
+						System.out.println("Padrao de atividade registado com sucesso!");
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 			} else if (Integer.parseInt(input) == 6) { // Simular evento de inatividade
 				Scanner sc6 = new Scanner(System.in);

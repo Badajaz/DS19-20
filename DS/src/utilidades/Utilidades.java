@@ -29,7 +29,7 @@ public class Utilidades {
 
 		System.out.println(checkHour("233:59"));
 		
-		writePadraoInatividade("45", "20:20", "21:05");
+		writePadraoAtividade("cozinha", "23:00", "07:00");
 
 	}
 
@@ -163,7 +163,7 @@ public class Utilidades {
 	}
 
 	public static void writePadraoInatividade(String duracao, String horaInicio, String horaFim) throws IOException {
-		File f = new File("padraoInatividade.txt");
+		File f = new File("inatividades.txt");
 		if (!f.exists()) {
 			f.createNewFile();
 		}
@@ -175,6 +175,21 @@ public class Utilidades {
 		out.close();
 		fw.close();
 
+	}
+
+	public static void writePadraoAtividade(String divisao, String horaInicio, String horaFim) throws IOException {
+		File f = new File("atividades.txt");
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(f, true);
+		BufferedWriter out = new BufferedWriter(fw);
+		out.write("Detecao de atividade na " + divisao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
+		out.newLine();
+		out.close();
+		fw.close();
+		
 	}
 
 }
