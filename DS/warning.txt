@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 aaa
+=======
+aaaAviso Aviso Aviso de 12-12-2012 12:12 até 13-12-2012 12:13 de 50 em 50 horas conhecimento de FALTA CONTACTO
+>>>>>>> 5418a6499f0cfd66bc05d9a52c8e087bbc7fb4b6
