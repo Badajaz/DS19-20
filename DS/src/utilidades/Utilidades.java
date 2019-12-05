@@ -43,6 +43,15 @@ public class Utilidades {
 
 	}
 
+	/**
+	 * permite escrever o warning num formato para o ficheiro
+	 * 
+	 * @param mensagem 
+	 * @param dataInicio
+	 * @param dataFim
+	 * @param periodicidade
+	 * @throws IOException
+	 */
 	public static void writeWarning(String mensagem, String dataInicio, String dataFim, String periodicidade)
 			throws IOException {
 		File f = new File("warning.txt");
@@ -60,6 +69,12 @@ public class Utilidades {
 		fw.close();
 	}
 	
+	/**
+	 * 
+	 * permite dar delete a um warning
+	 * @param mensagem - warning
+	 * @throws IOException
+	 */
 	public static void deleteWarning(String mensagem) throws IOException {
 		File f = new File("warning.txt");
 		if (!f.exists()) {
@@ -107,6 +122,10 @@ public class Utilidades {
 		 && checkHour(dateAndHours[1]);
 	}
 	
+	/**
+	 * @param hour - hora presente na data
+	 * @return verifica se a hora é válida
+	 */
 	public static boolean checkHour(String hour) {
 		
 		String[] splitHour = hour.split(":");
