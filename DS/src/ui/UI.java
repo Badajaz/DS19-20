@@ -40,10 +40,23 @@ public class UI extends Thread {
 				mensagem = sc1.nextLine();
 				System.out.println(Messages.DATA_INICIO_AVISO);
 				dataInicio = sc1.nextLine();
+				
+				while(Utilidades.validateDate(dataInicio)) 
+					dataInicio = sc1.nextLine();
+				
 				System.out.println(Messages.DATA_FIM_AVISO);
 				dataFim = sc1.nextLine();
+				
+				while(Utilidades.validateDate(dataFim)) 
+					dataFim = sc1.nextLine();
+				
+				
 				System.out.println(Messages.PERIODICIDADE_AVISO);
 				periodicidade = sc1.nextLine();
+				
+				while(Utilidades.validatePeriodicity(periodicidade)) 
+					periodicidade = sc1.nextLine();
+				
 				
 				String horaInicio = dataInicio.substring(11); // inicio da hora na string dataInicio
 				String horaFim = dataFim.substring(11); // inicio da hora na string dataInicio
@@ -51,7 +64,7 @@ public class UI extends Thread {
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
 				} catch (IOException e) {
-					System.err.println("Não foi possível criar o aviso.");
+					System.err.println("Nï¿½o foi possï¿½vel criar o aviso.");
 					e.printStackTrace();
 				}
 				
@@ -64,7 +77,7 @@ public class UI extends Thread {
 				try {
 					Utilidades.deleteWarning(mensagem);
 				} catch (IOException e) {
-					System.err.println("Não foi possível apagar o aviso.");
+					System.err.println("Nï¿½o foi possï¿½vel apagar o aviso.");
 					e.printStackTrace();
 				}
 			} else if (Integer.parseInt(input) == 3) { // Criar novo contacto
@@ -76,13 +89,21 @@ public class UI extends Thread {
 				System.out.println(Messages.TEL_CONTACTO);
 				numContacto = sc3.nextLine();
 				
+				while(Utilidades.validateNumberContact(numContacto)) 
+					numContacto = sc3.nextLine();
+				
+				
 				//TODO: registar contacto
-			} else if (Integer.parseInt(input) == 4) { // Criar padrão de inatividade
+			} else if (Integer.parseInt(input) == 4) { // Criar padrï¿½o de inatividade
 				Scanner sc4 = new Scanner(System.in);
-			} else if (Integer.parseInt(input) == 5) { // Criar padrão de atividade
+				
+			} else if (Integer.parseInt(input) == 5) { // Criar padrï¿½o de atividade
 				Scanner sc5 = new Scanner(System.in);
+				
 			} else if (Integer.parseInt(input) == 6) { // Simular evento de inatividade
 				Scanner sc6 = new Scanner(System.in);
+				
+				
 			}
 
 		}

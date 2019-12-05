@@ -7,15 +7,23 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.regex.Pattern;
 
 public class Utilidades {
+	
+	private static Pattern DATE_PATTERN = Pattern.compile(
+		      "^\\d{4}-\\d{2}-\\d{2}$");
+	
 
 	public static void main(String[] args) throws IOException {
 		//writeFiles();
-		writeWarning("Tomar antibiótico", "2019-10-01 08:00", "2019-10-20 20:00", "8");
-		writeWarning("Deixa de tomar merdas crl", "2019-10-01 08:00", "2019-10-20 20:00", "8");
-		
+		//writeWarning("Tomar antibiï¿½tico", "2019-10-01 08:00", "2019-10-20 20:00", "8");
+		//writeWarning("Deixa de tomar merdas crl", "2019-10-01 08:00", "2019-10-20 20:00", "8");
 		//deleteWarning("Deixa de tomar merdas crl");
+		//System.out.println(validateDate("2019-10-01"));;
+		System.out.println(validateNumberContact("913885916"));
+		System.out.println(validatePeriodicity("1C"));
+	
 	}
 
 	public static void writeFiles() throws IOException {
@@ -41,7 +49,7 @@ public class Utilidades {
 		
 		FileWriter fw = new FileWriter("warning.txt", true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write(mensagem + " de " + dataInicio + " até " + dataFim + " de " + periodicidade + " em " + periodicidade + " horas ");
+		out.write(mensagem + " de " + dataInicio + " atÃ© " + dataFim + " de " + periodicidade + " em " + periodicidade + " horas ");
 		out.newLine();
 		out.close();
 		fw.close();
@@ -80,5 +88,30 @@ public class Utilidades {
 		Files.delete(f.toPath());
 		fAux.renameTo(new File("warning.txt"));
 	}
+	
+	public static boolean validateDate(String date) {
+		 return DATE_PATTERN.matcher(date).matches();
+	}
+	
+	public static boolean  validatePeriodicity(String periodicity) {
+		
+		
+		for (int i = 0; i < periodicity.length(); i++) {
+			if(periodicity.charAt(i) < '0' || periodicity.charAt(i) > '9') {
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
+	
+	
+	public static boolean  validateNumberContact(String number)  {
+		
+		return number.length() == 9 && validatePeriodicity(number);
+	}
+	
+	
 
 }
