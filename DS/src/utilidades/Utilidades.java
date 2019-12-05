@@ -7,6 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Utilidades {
@@ -18,7 +22,7 @@ public class Utilidades {
 	
 	
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		//writeFiles();
 		//writeWarning("Tomar antibi�tico", "2019-10-01 08:00", "2019-10-20 20:00", "8");
 		//writeWarning("Deixa de tomar merdas crl", "2019-10-01 08:00", "2019-10-20 20:00", "8");
@@ -27,7 +31,9 @@ public class Utilidades {
 		//System.out.println(validateNumberContact("913885916"));
 		//System.out.println(validatePeriodicity("1C"));
 		
-		System.out.println(checkHour("233:59"));
+		//System.out.println(checkHour("233:59"));
+		
+		System.out.println(checkTimeLine("2019-10-01 08:00", "2019-10-01 20:00"));
 	
 	}
 
@@ -162,6 +168,24 @@ public class Utilidades {
 		
 		return number.length() == 9 && validatePeriodicity(number);
 	}
+	
+	
+	
+	public static boolean checkTimeLine(String begin, String end) throws ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date beginDate = sdf.parse(begin);
+		
+		
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date endDate  = sdf2.parse(end);
+		
+		return beginDate.before(endDate); 	
+	}
+	
+	
+	
+	
 	
 	
 
