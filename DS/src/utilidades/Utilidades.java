@@ -15,23 +15,20 @@ import java.util.regex.Pattern;
 
 public class Utilidades {
 
-	private static Pattern DATE_PATTERN = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+	private static Pattern DATE_PATTERN = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
 
 	// private static Pattern HOUR_PATTERN =
 	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
 
-
 	public static void main(String[] args) throws IOException {
-		
-		writeContacts("maria", "913885916");
-		HashMap<String, String> contacts = populateContacts();
-		System.out.println(contacts.get("maria"));
-		
-		
 
+		writeContacts("maria", "913885916");
+		//HashMap<String, String> contacts = populateContacts();
+		//System.out.println(contacts.get("maria"));
+		
+		System.out.println("validar data: " + validateDate("05-12-2019 12:00"));
 
 	}
-
 
 	/**
 	 * permite escrever o warning num formato para o ficheiro
@@ -48,8 +45,6 @@ public class Utilidades {
 		if (!f.exists()) {
 			f.createNewFile();
 		}
-
-		String horaInicio = dataInicio.substring(11); // inicio da hora na string dataInicio
 
 		FileWriter fw = new FileWriter("warning.txt", true);
 		BufferedWriter out = new BufferedWriter(fw);
@@ -107,7 +102,6 @@ public class Utilidades {
 	 */
 	public static boolean validateDate(String date) {
 
-		// TODO verificação das horas.
 		String[] dateAndHours = date.split(" ");
 		return DATE_PATTERN.matcher(dateAndHours[0]).matches() && checkHour(dateAndHours[1]);
 	}
@@ -126,8 +120,8 @@ public class Utilidades {
 	}
 
 	/**
-	 * @param periodicity - duração do período
-	 * @return retorna se o a periodicidade é válida
+	 * @param periodicity - duracao do periodo
+	 * @return retorna se o a periodicidade eh valida
 	 */
 	public static boolean validatePeriodicity(String periodicity) {
 
@@ -142,14 +136,22 @@ public class Utilidades {
 	}
 
 	/**
-	 * @param number - número de contacto
-	 * @return retorna se o número é válido
+	 * @param number - numero de contacto
+	 * @return retorna se o numero eh valido
 	 */
 	public static boolean validateNumberContact(String number) {
-
+		System.out.println();
 		return number.length() == 9 && validatePeriodicity(number);
 	}
 
+	/**
+	 * Regista uma inatividade.
+	 * 
+	 * @param duracao    duracao da inatividade
+	 * @param horaInicio hora de inicio da inatividade
+	 * @param horaFim    hora de fim da inatividade
+	 * @throws IOException
+	 */
 	public static void writePadraoInatividade(String duracao, String horaInicio, String horaFim) throws IOException {
 		File f = new File("inatividades.txt");
 		if (!f.exists()) {
@@ -159,12 +161,21 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Inatividade durante " + duracao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
+		System.out.println("Padrao de inatividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
 
 	}
 
+	/**
+	 * Regista um padrao de atividade.
+	 * 
+	 * @param divisao    divisao onde ocorreu a atividade
+	 * @param horaInicio hora de inicio
+	 * @param horaFim    hora de fim
+	 * @throws IOException
+	 */
 	public static void writePadraoAtividade(String divisao, String horaInicio, String horaFim) throws IOException {
 		File f = new File("atividades.txt");
 		if (!f.exists()) {
@@ -174,22 +185,21 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Detecao de atividade na " + divisao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
+		System.out.println("Padrao de atividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
 
 	}
 
-
-	
 	/**
+	 * Regista os contactos
 	 * 
-	 * escreve os contactos num ficheiro
-	 * @param nome -
-	 * @param numero
+	 * @param nome   nome do contacto
+	 * @param numero numero do contacto
 	 * @throws IOException
 	 */
-	public static void writeContacts(String nome,String numero) throws IOException {
+	public static void writeContacts(String nome, String numero) throws IOException {
 		File f = new File("contacts.txt");
 		if (!f.exists()) {
 			f.createNewFile();
@@ -197,12 +207,12 @@ public class Utilidades {
 
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write(nome+":"+numero);
+		out.write(nome + ":" + numero);
+		System.out.println("Contacto inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
 	}
-
 
 	public static boolean checkTimeLine(String begin, String end) throws ParseException {
 
@@ -220,25 +230,24 @@ public class Utilidades {
 	 * @return popula contactos num hashmap
 	 * @throws IOException
 	 */
-	public static HashMap<String,String> populateContacts() throws IOException {
+	public static HashMap<String, String> populateContacts() throws IOException {
 
-	    HashMap<String, String> contacts = new HashMap<>();
-		
+		HashMap<String, String> contacts = new HashMap<>();
+
 		File file = new File("contacts.txt");
-		if(file.exists()) {
-			BufferedReader br = new BufferedReader(new FileReader(file)); 
+		if (file.exists()) {
+			BufferedReader br = new BufferedReader(new FileReader(file));
 
-			String st; 
+			String st;
 
 			while ((st = br.readLine()) != null) {
 				String[] splitContact = st.split(":");
 				contacts.put(splitContact[0], splitContact[1]);
 			}
+			br.close();
 		}
-		
-	
-			
+
 		return contacts;
-	} 
+	}
 
 }
