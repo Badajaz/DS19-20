@@ -8,10 +8,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import java.util.regex.Pattern;
 
 public class Utilidades {
@@ -21,6 +25,7 @@ public class Utilidades {
 	// private static Pattern HOUR_PATTERN =
 	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
 
+
 	public static void main(String[] args) throws IOException {
 		
 		writeContacts("maria", "913885916");
@@ -28,6 +33,7 @@ public class Utilidades {
 		System.out.println(contacts.get("maria"));
 		
 		
+
 
 	}
 
@@ -179,6 +185,7 @@ public class Utilidades {
 
 	}
 
+
 	
 	/**
 	 * 
@@ -199,6 +206,18 @@ public class Utilidades {
 		out.newLine();
 		out.close();
 		fw.close();
+	}
+
+
+	public static boolean checkTimeLine(String begin, String end) throws ParseException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date beginDate = sdf.parse(begin);
+
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date endDate = sdf2.parse(end);
+
+		return beginDate.before(endDate);
 
 	}
 

@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 import i18n.Messages;
@@ -47,7 +48,19 @@ public class UI extends Thread {
 
 				while (Utilidades.validateDate(dataFim))
 					dataFim = sc1.nextLine();
-
+				try {
+					while(Utilidades.checkTimeLine(dataInicio,dataFim)) {
+						System.out.println(Messages.DATA_INICIO_SUPERIOR_FIM);
+						System.out.println(Messages.DATA_INICIO_AVISO);
+						dataInicio = sc1.nextLine();
+						System.out.println(Messages.DATA_FIM_AVISO);
+						dataFim = sc1.nextLine();
+					}
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				System.out.println(Messages.PERIODICIDADE_AVISO);
 				periodicidade = sc1.nextLine();
 
