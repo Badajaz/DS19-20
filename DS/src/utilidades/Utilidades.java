@@ -14,13 +14,16 @@ public class Utilidades {
 	private static Pattern DATE_PATTERN = Pattern.compile(
 		      "^\\d{4}-\\d{2}-\\d{2}$");
 	
+	//private static Pattern HOUR_PATTERN = Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
+	
+	
 
 	public static void main(String[] args) throws IOException {
 		//writeFiles();
 		//writeWarning("Tomar antibi�tico", "2019-10-01 08:00", "2019-10-20 20:00", "8");
 		//writeWarning("Deixa de tomar merdas crl", "2019-10-01 08:00", "2019-10-20 20:00", "8");
 		//deleteWarning("Deixa de tomar merdas crl");
-		//System.out.println(validateDate("2019-10-01"));;
+		System.out.println(validateDate("2019-10-20 20:00"));;
 		System.out.println(validateNumberContact("913885916"));
 		System.out.println(validatePeriodicity("1C"));
 	
@@ -89,9 +92,14 @@ public class Utilidades {
 		fAux.renameTo(new File("warning.txt"));
 	}
 	
+
 	public static boolean validateDate(String date) {
-		 return DATE_PATTERN.matcher(date).matches();
+		 String[] dateAndHours = date.split(" ");
+		 System.out.println(dateAndHours[0]);
+		 System.out.println(dateAndHours[1]);
+		 return DATE_PATTERN.matcher(dateAndHours[0]).matches(); //&& HOUR_PATTERN.matcher(dateAndHours[1]).matches() ;
 	}
+	
 	
 	public static boolean  validatePeriodicity(String periodicity) {
 		
