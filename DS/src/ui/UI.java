@@ -10,7 +10,7 @@ import warnings.WarningDB;
 public class UI extends Thread {
 
 	public static void main(String[] args) throws IOException {
-		Utilidades.writeFiles();
+	
 
 	}
 

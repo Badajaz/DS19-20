@@ -3,10 +3,15 @@ package utilidades;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Utilidades {
@@ -17,33 +22,15 @@ public class Utilidades {
 	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
 
 	public static void main(String[] args) throws IOException {
-		// writeFiles();
-		// writeWarning("Tomar antibi�tico", "2019-10-01 08:00", "2019-10-20 20:00",
-		// "8");
-		// writeWarning("Deixa de tomar merdas crl", "2019-10-01 08:00", "2019-10-20
-		// 20:00", "8");
-		// deleteWarning("Deixa de tomar merdas crl");
-		// System.out.println(validateDate("2019-10-20 20:00"));;
-		// System.out.println(validateNumberContact("913885916"));
-		// System.out.println(validatePeriodicity("1C"));
-
-		System.out.println(checkHour("233:59"));
 		
-		writePadraoAtividade("cozinha", "23:00", "07:00");
+		writeContacts("maria", "913885916");
+		HashMap<String, String> contacts = populateContacts();
+		System.out.println(contacts.get("maria"));
+		
+		
 
 	}
 
-	public static void writeFiles() throws IOException {
-		File f = new File("warning.txt");
-		if (!f.exists()) {
-			f.createNewFile();
-		}
-
-		FileWriter fileWriter = new FileWriter("warning.txt");
-		fileWriter.write("aaa");
-		fileWriter.close();
-
-	}
 
 	/**
 	 * permite escrever o warning num formato para o ficheiro
@@ -189,7 +176,55 @@ public class Utilidades {
 		out.newLine();
 		out.close();
 		fw.close();
-		
+
 	}
+
+	
+	/**
+	 * 
+	 * escreve os contactos num ficheiro
+	 * @param nome -
+	 * @param numero
+	 * @throws IOException
+	 */
+	public static void writeContacts(String nome,String numero) throws IOException {
+		File f = new File("contacts.txt");
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(f, true);
+		BufferedWriter out = new BufferedWriter(fw);
+		out.write(nome+":"+numero);
+		out.newLine();
+		out.close();
+		fw.close();
+
+	}
+
+	/**
+	 * @return popula contactos num hashmap
+	 * @throws IOException
+	 */
+	public static HashMap<String,String> populateContacts() throws IOException {
+
+	    HashMap<String, String> contacts = new HashMap<>();
+		
+		File file = new File("contacts.txt");
+		if(file.exists()) {
+			BufferedReader br = new BufferedReader(new FileReader(file)); 
+
+			String st; 
+
+			while ((st = br.readLine()) != null) {
+				String[] splitContact = st.split(":");
+				contacts.put(splitContact[0], splitContact[1]);
+			}
+		}
+		
+	
+			
+		return contacts;
+	} 
 
 }
