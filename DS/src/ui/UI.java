@@ -10,21 +10,19 @@ import warnings.WarningDB;
 public class UI extends Thread {
 
 	public static void main(String[] args) throws IOException {
-		UI ui = new UI();
 		Utilidades.writeFiles();
 
-		ui.start();
-
 	}
-
+	
 	@Override
 	public void run() {
 		WarningDB wdb = null;
 		
 		Scanner sc = new Scanner(System.in);
-		String input;
+		String input = sc.nextLine();
 
-		do {
+		while( !input.equals("q") ) {
+
 			System.out.println(Messages.WELCOME);
 			System.out.println(Messages.OPT1);
 			System.out.println(Messages.OPT2);
@@ -66,10 +64,7 @@ public class UI extends Thread {
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
 				} catch (IOException e) {
-<<<<<<< HEAD
 					System.err.println("Nï¿½o foi possï¿½vel criar o aviso.");
-=======
->>>>>>> 5418a6499f0cfd66bc05d9a52c8e087bbc7fb4b6
 					e.printStackTrace();
 				}
 				
@@ -82,10 +77,7 @@ public class UI extends Thread {
 				try {
 					Utilidades.deleteWarning(mensagem);
 				} catch (IOException e) {
-<<<<<<< HEAD
 					System.err.println("Nï¿½o foi possï¿½vel apagar o aviso.");
-=======
->>>>>>> 5418a6499f0cfd66bc05d9a52c8e087bbc7fb4b6
 					e.printStackTrace();
 				}
 			} else if (Integer.parseInt(input) == 3) { // Criar novo contacto
@@ -97,21 +89,12 @@ public class UI extends Thread {
 				System.out.println(Messages.TEL_CONTACTO);
 				numContacto = sc3.nextLine();
 				
-<<<<<<< HEAD
 				while(Utilidades.validateNumberContact(numContacto)) 
 					numContacto = sc3.nextLine();
 				
 				
 				//TODO: registar contacto
 			} else if (Integer.parseInt(input) == 4) { // Criar padrï¿½o de inatividade
-=======
-				try {
-					Utilidades.writeContacto(nomeContacto, numContacto);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} else if (Integer.parseInt(input) == 4) { // Criar padrão de inatividade
->>>>>>> 5418a6499f0cfd66bc05d9a52c8e087bbc7fb4b6
 				Scanner sc4 = new Scanner(System.in);
 				
 			} else if (Integer.parseInt(input) == 5) { // Criar padrï¿½o de atividade
@@ -123,6 +106,12 @@ public class UI extends Thread {
 				
 			}
 
-		} while( !sc.nextLine().equals("q"));
+		}
+
+
 	}
+	
 }
+
+
+
