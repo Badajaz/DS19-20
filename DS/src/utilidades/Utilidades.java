@@ -23,9 +23,11 @@ public class Utilidades {
 		//writeWarning("Tomar antibi�tico", "2019-10-01 08:00", "2019-10-20 20:00", "8");
 		//writeWarning("Deixa de tomar merdas crl", "2019-10-01 08:00", "2019-10-20 20:00", "8");
 		//deleteWarning("Deixa de tomar merdas crl");
-		System.out.println(validateDate("2019-10-20 20:00"));;
-		System.out.println(validateNumberContact("913885916"));
-		System.out.println(validatePeriodicity("1C"));
+		//System.out.println(validateDate("2019-10-20 20:00"));;
+		//System.out.println(validateNumberContact("913885916"));
+		//System.out.println(validatePeriodicity("1C"));
+		
+		System.out.println(checkHour("233:59"));
 	
 	}
 
@@ -93,14 +95,32 @@ public class Utilidades {
 	}
 	
 
+	/**
+	 * @param date
+	 * @return retorna se o formato da data é v
+	 */
 	public static boolean validateDate(String date) {
-		 String[] dateAndHours = date.split(" ");
-		 System.out.println(dateAndHours[0]);
-		 System.out.println(dateAndHours[1]);
-		 return DATE_PATTERN.matcher(dateAndHours[0]).matches(); //&& HOUR_PATTERN.matcher(dateAndHours[1]).matches() ;
+		
+		//TODO verificação das horas.
+		String[] dateAndHours = date.split(" ");
+		 return DATE_PATTERN.matcher(dateAndHours[0]).matches() 
+		 && checkHour(dateAndHours[1]);
+	}
+	
+	public static boolean checkHour(String hour) {
+		
+		String[] splitHour = hour.split(":");
+		int hora = Integer.parseInt(splitHour[0]);
+		int minuto = Integer.parseInt(splitHour[1]);
+		return hora >= 0 && hora <= 23 && minuto >= 0 && minuto <= 59;
+		
 	}
 	
 	
+	/**
+	 * @param periodicity - duração do período
+	 * @return retorna se o a periodicidade é válida
+	 */
 	public static boolean  validatePeriodicity(String periodicity) {
 		
 		
@@ -115,6 +135,10 @@ public class Utilidades {
 	}
 	
 	
+	/**
+	 * @param number - número de contacto
+	 * @return retorna se o número é válido
+	 */
 	public static boolean  validateNumberContact(String number)  {
 		
 		return number.length() == 9 && validatePeriodicity(number);
