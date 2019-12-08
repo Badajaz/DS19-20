@@ -1,6 +1,8 @@
 package ui;
 
 import java.io.IOException;
+import com.bezirk.middleware.Bezirk;
+import com.bezirk.middleware.java.proxy.BezirkMiddleware;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -12,7 +14,6 @@ public class UI extends Thread {
 
 	public static void main(String[] args) throws IOException {
 		UI ui = new UI();
-
 		ui.start();
 	}
 
