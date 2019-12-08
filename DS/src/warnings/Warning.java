@@ -2,7 +2,10 @@ package warnings;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,10 +50,13 @@ public class Warning {
 	}
 	
 	
-	public void cancelTimer() {
+	public void cancelTimer() throws ParseException {
 		
+		String dateStr = parameter.get(2)+" "+parameter.get(3);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date date = sdf.parse(dateStr);
 		
-		if (Utilidades.validateDeadline(other)) {
+		if (Utilidades.validateDeadline(date)) {
 			t.cancel();
 		}
 		

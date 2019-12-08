@@ -1,5 +1,8 @@
 package ui;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,6 +31,26 @@ public class UI extends Thread {
 		Scanner sc = new Scanner(System.in);
 		String input = "";
 		ArrayWarning = new ArrayList<Warning>();
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("warning.txt"));
+			String st;
+			
+			while ((st = br.readLine()) != null) {
+				ArrayWarning.add(new Warning(st));
+			}
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		for (int i = 0; i < ArrayWarning.size(); i++) {
+			
+			ArrayWarning.get(i).setTimerWarning();
+			
+		}
+
+	
 		
 		
 		

@@ -258,6 +258,7 @@ public class Utilidades {
 	}
 	
 	
+	//Não está correcta esta verificação refazer TODO
 	public static boolean validateDeadline(Date other) {
 		
 		Date date = new Date();
@@ -265,8 +266,7 @@ public class Utilidades {
 		System.out.println(fmt.format(date));
 		System.out.println(fmt.format(other));
 		return fmt.format(date).equals(fmt.format(other));
-		
-		
+			
 	}
 	
 	
