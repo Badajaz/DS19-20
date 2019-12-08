@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,11 +16,11 @@ import utilidades.Utilidades;
 import warnings.Warning;
 
 public class UI extends Thread {
-	
+
 	private Timer t;
 	private  List<Warning> ArrayWarning;
-	
-	
+
+
 	public static void main(String[] args) throws IOException {
 		UI ui = new UI();
 		ui.start();
@@ -27,33 +28,36 @@ public class UI extends Thread {
 
 	@Override
 	public void run() {
-		
+
 		Scanner sc = new Scanner(System.in);
 		String input = "";
 		ArrayWarning = new ArrayList<Warning>();
 		BufferedReader br;
-		try {
-			br = new BufferedReader(new FileReader("warning.txt"));
-			String st;
-			
-			while ((st = br.readLine()) != null) {
-				ArrayWarning.add(new Warning(st));
+		File r = new File("warning.txt");
+		if(r.exists()) {
+
+			try {
+				br = new BufferedReader(new FileReader("warning.txt"));
+				String st;
+
+				while ((st = br.readLine()) != null) {
+					ArrayWarning.add(new Warning(st));
+				}
+			} catch (Exception e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
-		} catch (Exception e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		for (int i = 0; i < ArrayWarning.size(); i++) {
-			
-			ArrayWarning.get(i).setTimerWarning();
-			
+
+			for (int i = 0; i < ArrayWarning.size(); i++) {
+
+				ArrayWarning.get(i).setTimerWarning();
+
+			}
+
+
 		}
 
-	
-		
-		
-		
+
 		while (!input.equals("q")) {
 
 			System.out.println(Messages.WELCOME);
@@ -186,7 +190,7 @@ public class UI extends Thread {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				sc5.close();
 
 			} else if (Integer.parseInt(input) == 6) { // Simular evento de inatividade
