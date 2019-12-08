@@ -1,17 +1,22 @@
 package ui;
 
 import java.io.IOException;
-import com.bezirk.middleware.Bezirk;
-import com.bezirk.middleware.java.proxy.BezirkMiddleware;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Timer;
 
-import i18n.I18N;
 import i18n.Messages;
 import utilidades.Utilidades;
+import warnings.Warning;
 
 public class UI extends Thread {
-
+	
+	private Timer t;
+	private  List<Warning> ArrayWarning;
+	
+	
 	public static void main(String[] args) throws IOException {
 		UI ui = new UI();
 		ui.start();
@@ -19,9 +24,13 @@ public class UI extends Thread {
 
 	@Override
 	public void run() {
+		
 		Scanner sc = new Scanner(System.in);
 		String input = "";
-
+		ArrayWarning = new ArrayList<Warning>();
+		
+		
+		
 		while (!input.equals("q")) {
 
 			System.out.println(Messages.WELCOME);

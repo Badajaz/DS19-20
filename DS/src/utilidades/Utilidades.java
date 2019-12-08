@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -20,13 +23,11 @@ public class Utilidades {
 	// private static Pattern HOUR_PATTERN =
 	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 
-		writeContacts("maria", "913885916");
-		//HashMap<String, String> contacts = populateContacts();
-		//System.out.println(contacts.get("maria"));
-		
-		System.out.println("validar data: " + validateDate("05-12-2019 12:00"));
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date endDate = sdf2.parse("08-12-2019 22:08");
+		System.out.println(validateDeadline(endDate));
 
 	}
 
@@ -249,5 +250,27 @@ public class Utilidades {
 
 		return contacts;
 	}
+	
+	
+	public static boolean isDate(String date) {
+		return DATE_PATTERN.matcher(date).matches();
+	
+	}
+	
+	
+	public static boolean validateDeadline(Date other) {
+		
+		Date date = new Date();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		System.out.println(fmt.format(date));
+		System.out.println(fmt.format(other));
+		return fmt.format(date).equals(fmt.format(other));
+		
+		
+	}
+	
+	
+	
+	
 
 }
