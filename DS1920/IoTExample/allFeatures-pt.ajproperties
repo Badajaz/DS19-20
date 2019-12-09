@@ -1,0 +1,3 @@
+src.includes = src/
+src.excludes = src/i18n/en_US.aj,\
+			   src/i18n/Messages_en_US.properties
