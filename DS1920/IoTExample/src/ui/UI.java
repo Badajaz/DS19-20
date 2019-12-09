@@ -77,7 +77,7 @@ public class UI extends Thread {
 				dataInicio = sc1.nextLine();
 
 				while (!Utilidades.validateDate(dataInicio)) {
-					System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
+					System.out.println(I18N.getString(Messages.DATA_VALIDA));
 					dataInicio = sc1.nextLine();
 				}
 

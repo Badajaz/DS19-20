@@ -1,15 +1,13 @@
 package warnings;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import utilidades.Utilidades;
 
 public class Warning {
 
@@ -39,7 +37,6 @@ public class Warning {
 				}
 			};
 			t = new Timer("Timer");
-
 			long delay  = 0;
 			long period = Long.parseLong(parameter.get(parameter.size()-1));
 			t.scheduleAtFixedRate(repeatedTask, delay, period);
@@ -56,9 +53,9 @@ public class Warning {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date date = sdf.parse(dateStr);
 		
-		if (Utilidades.validateDeadline(date)) {
+		//if (Utilidades.validateDeadline(date)) {
 			t.cancel();
-		}
+		//}
 		
 
 	}
@@ -68,22 +65,33 @@ public class Warning {
 
 
 		String [] warningParameters = warningText.split(" ");
+		List<String> params = Arrays.asList(warningParameters);
+		ArrayList<String> params2 = new ArrayList<String>();
+		int dataInicio = params.indexOf("de")+1;
+		System.out.println("dataaaaa:"+dataInicio);
+		int HorasInicio = params.indexOf("de")+2;
+		System.out.println("horassss:"+HorasInicio);
+		
+		int dataFim = params.indexOf("ate")+1;
+		System.out.println("dattta2:"+dataFim);
+		
+		int HorasFim = params.indexOf("ate")+2;
+		System.out.println("dattta2:"+HorasFim);
+		
+		int periodicidade = params.size()-2;
+		System.out.println("periodicidade:"+periodicidade);
 
-		for(String s: warningParameters) {
+		params2.add(params.get(dataInicio));
+		params2.add(params.get(HorasInicio));
+		params2.add(params.get(dataFim));
+		params2.add(params.get(HorasFim));
+		params2.add(params.get(periodicidade));
 
-			if(Utilidades.isDate(s) || Utilidades.checkHour(s)|| Utilidades.validatePeriodicity(s))
-			{
-				parameter.add(s);
-			}
+	
 
-
-		}
-
-		return parameter;
+		return params2;
 
 	}
 
-
-
-
+	
 }

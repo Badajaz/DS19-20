@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -25,8 +22,8 @@ public class Utilidades {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		System.out.println(validateDeadline("08-12-2019 22:08"));
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		System.out.println(validateDeadline("09-12-2019 15:38"));
 
 	}
 
@@ -48,7 +45,7 @@ public class Utilidades {
 
 		FileWriter fw = new FileWriter("warning.txt", true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write(mensagem + " de " + dataInicio + " até " + dataFim + " de " + periodicidade + " em " + periodicidade
+		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + periodicidade + " em " + periodicidade
 				+ " horas ");
 		out.newLine();
 		out.close();
@@ -111,7 +108,7 @@ public class Utilidades {
 	 * @return verifica se a hora é válida
 	 */
 	public static boolean checkHour(String hour) {
-
+		System.out.println("check hour: " + hour);
 		String[] splitHour = hour.split(":");
 		int hora = Integer.parseInt(splitHour[0]);
 		int minuto = Integer.parseInt(splitHour[1]);
@@ -261,8 +258,9 @@ public class Utilidades {
 	public static boolean validateDeadline(String other) {
 		
 		Date date = new Date();
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		System.out.println(fmt.format(date));
+		System.out.println(other);
 		return fmt.format(date).equals(other);
 			
 	}
