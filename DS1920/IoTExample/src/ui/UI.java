@@ -32,31 +32,32 @@ public class UI extends Thread {
 		Scanner sc = new Scanner(System.in);
 		String input = "";
 		ArrayWarning = new ArrayList<Warning>();
-		BufferedReader br;
-		File r = new File("warning.txt");
-		if (r.exists()) {
-
-			try {
-				br = new BufferedReader(new FileReader("warning.txt"));
-				String st;
-
-				while ((st = br.readLine()) != null) {
-					ArrayWarning.add(new Warning(st));
-				}
-			} catch (Exception e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-
-			for (int i = 0; i < ArrayWarning.size(); i++) {
-
-				ArrayWarning.get(i).setTimerWarning();
-
-			}
-
-		}
+		
 
 		while (!input.equals("q")) {
+			BufferedReader br;
+			File r = new File("warning.txt");
+			if (r.exists()) {
+
+				try {
+					br = new BufferedReader(new FileReader("warning.txt"));
+					String st;
+
+					while ((st = br.readLine()) != null) {
+						ArrayWarning.add(new Warning(st));
+					}
+				} catch (Exception e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+
+				for (int i = 0; i < ArrayWarning.size(); i++) {
+
+					ArrayWarning.get(i).setTimerWarning();
+
+				}
+
+			}
 
 			System.out.println(I18N.getString(Messages.WELCOME));
 			System.out.println(I18N.getString(Messages.OPT1));

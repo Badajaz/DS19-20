@@ -92,6 +92,10 @@ public class Utilidades {
 		Files.delete(f.toPath());
 		fAux.renameTo(new File("warning.txt"));
 	}
+	
+	public static void showWarning() {
+		
+	}
 
 	/**
 	 * @param date
@@ -260,13 +264,8 @@ public class Utilidades {
 		Date date = new Date();
 		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		System.out.println(fmt.format(date));
-		System.out.println(other);
 		return fmt.format(date).equals(other);
-			
 	}
-	
-	
-	
 	
 
 }
