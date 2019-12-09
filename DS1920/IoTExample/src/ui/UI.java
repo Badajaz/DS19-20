@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
 
+import i18n.I18N;
 import i18n.Messages;
 import utilidades.Utilidades;
 import warnings.Warning;
@@ -18,8 +19,7 @@ import warnings.Warning;
 public class UI extends Thread {
 
 	private Timer t;
-	private  List<Warning> ArrayWarning;
-
+	private List<Warning> ArrayWarning;
 
 	public static void main(String[] args) throws IOException {
 		UI ui = new UI();
@@ -34,7 +34,7 @@ public class UI extends Thread {
 		ArrayWarning = new ArrayList<Warning>();
 		BufferedReader br;
 		File r = new File("warning.txt");
-		if(r.exists()) {
+		if (r.exists()) {
 
 			try {
 				br = new BufferedReader(new FileReader("warning.txt"));
@@ -54,60 +54,58 @@ public class UI extends Thread {
 
 			}
 
-
 		}
-
 
 		while (!input.equals("q")) {
 
-			System.out.println(Messages.WELCOME);
-			System.out.println(Messages.OPT1);
-			System.out.println(Messages.OPT2);
-			System.out.println(Messages.OPT3);
-			System.out.println(Messages.OPT4);
-			System.out.println(Messages.OPT5);
-			System.out.println(Messages.OPT6);
+			System.out.println(I18N.getString(Messages.WELCOME));
+			System.out.println(I18N.getString(Messages.OPT1));
+			System.out.println(I18N.getString(Messages.OPT2));
+			System.out.println(I18N.getString(Messages.OPT3));
+			System.out.println(I18N.getString(Messages.OPT4));
+			System.out.println(I18N.getString(Messages.OPT5));
+			System.out.println(I18N.getString(Messages.OPT6));
 			input = sc.nextLine();
 
 			if (Integer.parseInt(input) == 1) { // Criar aviso
 				Scanner sc1 = new Scanner(System.in);
 				String mensagem, dataInicio, dataFim, periodicidade;
 
-				System.out.println(Messages.MENSAGEM_AVISO);
+				System.out.println(I18N.getString(Messages.MENSAGEM_AVISO));
 				mensagem = sc1.nextLine();
-				System.out.println(Messages.DATA_INICIO_AVISO);
+				System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
 				dataInicio = sc1.nextLine();
 
 				while (!Utilidades.validateDate(dataInicio)) {
-					System.out.println(Messages.DATA_INICIO_AVISO);
+					System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
 					dataInicio = sc1.nextLine();
 				}
 
-				System.out.println(Messages.DATA_FIM_AVISO);
+				System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
 				dataFim = sc1.nextLine();
 
 				while (!Utilidades.validateDate(dataFim)) {
-					System.out.println(Messages.DATA_FIM_AVISO);
+					System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
 					dataFim = sc1.nextLine();
 				}
 
 				try {
 					while (!Utilidades.checkTimeLine(dataInicio, dataFim)) {
-						System.out.println(Messages.DATA_INICIO_SUPERIOR_FIM);
-						System.out.println(Messages.DATA_INICIO_AVISO);
+						System.out.println(I18N.getString(Messages.DATA_INICIO_SUPERIOR_FIM));
+						System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
 						dataInicio = sc1.nextLine();
-						System.out.println(Messages.DATA_FIM_AVISO);
+						System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
 						dataFim = sc1.nextLine();
 					}
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
 
-				System.out.println(Messages.PERIODICIDADE_AVISO);
+				System.out.println(I18N.getString(Messages.PERIODICIDADE_AVISO));
 				periodicidade = sc1.nextLine();
 
 				while (!Utilidades.validatePeriodicity(periodicidade)) {
-					System.out.println(Messages.PERIODICIDADE_AVISO);
+					System.out.println(I18N.getString(Messages.PERIODICIDADE_AVISO));
 					periodicidade = sc1.nextLine();
 				}
 
@@ -124,7 +122,7 @@ public class UI extends Thread {
 			} else if (Integer.parseInt(input) == 2) { // Apagar aviso
 				Scanner sc2 = new Scanner(System.in);
 				String mensagem;
-				System.out.println(Messages.MENSAGEM_AVISO);
+				System.out.println(I18N.getString(Messages.MENSAGEM_AVISO));
 				mensagem = sc2.nextLine();
 
 				try {
@@ -138,13 +136,13 @@ public class UI extends Thread {
 				Scanner sc3 = new Scanner(System.in);
 				String nomeContacto, numContacto;
 
-				System.out.println(Messages.NOME_CONTACTO);
+				System.out.println(I18N.getString(Messages.NOME_CONTACTO));
 				nomeContacto = sc3.nextLine();
-				System.out.println(Messages.TEL_CONTACTO);
+				System.out.println(I18N.getString(Messages.TEL_CONTACTO));
 				numContacto = sc3.nextLine();
 
 				while (!Utilidades.validateNumberContact(numContacto)) {
-					System.out.println(Messages.TEL_CONTACTO);
+					System.out.println(I18N.getString(Messages.TEL_CONTACTO));
 					numContacto = sc3.nextLine();
 				}
 
@@ -158,11 +156,11 @@ public class UI extends Thread {
 			} else if (Integer.parseInt(input) == 4) { // Criar padrao de inatividade
 				Scanner sc4 = new Scanner(System.in);
 				String duracao, horaInicio, horaFim;
-				System.out.println(Messages.DURACAO);
+				System.out.println(I18N.getString(Messages.DURACAO));
 				duracao = sc4.nextLine();
-				System.out.println(Messages.HORA_INICIAL);
+				System.out.println(I18N.getString(Messages.HORA_INICIAL));
 				horaInicio = sc4.nextLine();
-				System.out.println(Messages.HORA_FINAL);
+				System.out.println(I18N.getString(Messages.HORA_FINAL));
 				horaFim = sc4.nextLine();
 
 				try {
@@ -176,11 +174,11 @@ public class UI extends Thread {
 				Scanner sc5 = new Scanner(System.in);
 
 				String divisao, horaInicio, horaFim;
-				System.out.println(Messages.DIVISAO_ATIVIDADE);
+				System.out.println(I18N.getString(Messages.DIVISAO_ATIVIDADE));
 				divisao = sc5.nextLine();
-				System.out.println(Messages.HORA_INICIAL);
+				System.out.println(I18N.getString(Messages.HORA_INICIAL));
 				horaInicio = sc5.nextLine();
-				System.out.println(Messages.HORA_FINAL);
+				System.out.println(I18N.getString(Messages.HORA_FINAL));
 				horaFim = sc5.nextLine();
 
 				try {
