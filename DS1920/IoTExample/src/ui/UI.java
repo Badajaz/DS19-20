@@ -47,7 +47,6 @@ public class UI extends Thread {
 						ArrayWarning.add(new Warning(st));
 					}
 				} catch (Exception e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 
@@ -92,7 +91,7 @@ public class UI extends Thread {
 
 				try {
 					while (!Utilidades.checkTimeLine(dataInicio, dataFim)) {
-						System.out.println(I18N.getString(Messages.DATA_INICIO_SUPERIOR_FIM));
+						System.out.println(I18N.getString(Messages.DATA_INICIO_SUPERIOR));
 						System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
 						dataInicio = sc1.nextLine();
 						System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
@@ -199,6 +198,7 @@ public class UI extends Thread {
 			}
 
 		}
+		sc.close();
 	}
 
 }

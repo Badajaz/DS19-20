@@ -33,7 +33,9 @@ public class Warning {
 
 				TimerTask repeatedTask = new TimerTask() {
 					public void run() {
-						System.out.println(warningText);
+						int HorasInicio = warningText.indexOf("de");
+						int ate = warningText.indexOf("ate");
+						System.err.println(warningText.substring(HorasInicio+14, ate-1) + " - " + warningText.substring(0, HorasInicio));
 					}
 				};
 				t = new Timer("Timer");

@@ -42,10 +42,15 @@ public class Utilidades {
 		if (!f.exists()) {
 			f.createNewFile();
 		}
+		
+		int minutos = (int) ((Integer.parseInt(periodicidade) / 1000) / 60);
+		int horas = (int) ((Integer.parseInt(periodicidade) / 1000) / 60) / 60;
+		// 28800000 milissegundos -> 8 horas
+		// 60000 milissegundos -> 1 min
 
 		FileWriter fw = new FileWriter("warning.txt", true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + periodicidade + " em " + periodicidade
+		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + horas + " em " + horas
 				+ " horas ");
 		out.newLine();
 		out.close();
@@ -261,10 +266,16 @@ public class Utilidades {
 	//Não está correcta esta verificação refazer TODO
 	public static boolean validateDeadline(String other) {
 		
-		Date date = new Date();
 		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		System.out.println(fmt.format(date));
-		return fmt.format(date).equals(other);
+		Date date = new Date();
+		Date otherDate;
+		try { // se a date for depois da data do alarme no ficheiro, entao tocar alarme
+			otherDate = fmt.parse(other);
+			return date.after(otherDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 
