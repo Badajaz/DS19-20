@@ -26,7 +26,8 @@ public class Utilidades {
 	public static void main(String[] args) throws IOException, ParseException {
 
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		System.out.println(validateDeadline("08-12-2019 22:08"));
+		Date endDate = sdf2.parse("08-12-2019 22:08");
+		System.out.println(validateDeadline(endDate));
 
 	}
 

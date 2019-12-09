@@ -26,7 +26,8 @@ public class Utilidades {
 	public static void main(String[] args) throws IOException, ParseException {
 
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		System.out.println(validateDeadline("08-12-2019 22:08"));
+		Date endDate = sdf2.parse("08-12-2019 22:08");
+		System.out.println(validateDeadline(endDate));
 
 	}
 
@@ -258,12 +259,13 @@ public class Utilidades {
 	
 	
 	//Não está correcta esta verificação refazer TODO
-	public static boolean validateDeadline(String other) {
+	public static boolean validateDeadline(Date other) {
 		
 		Date date = new Date();
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		System.out.println(fmt.format(date));
-		return fmt.format(date).equals(other);
+		System.out.println(fmt.format(other));
+		return fmt.format(date).equals(fmt.format(other));
 			
 	}
 	
