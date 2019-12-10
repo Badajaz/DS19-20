@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Utilidades {
@@ -277,6 +278,11 @@ public class Utilidades {
 		}
 		return false;
 	}
+	
+
+	
+	
+	
 	
 
 }

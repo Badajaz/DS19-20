@@ -17,14 +17,23 @@ public class Button extends Event {
 	
 	/**
 	 * 
+	 * Criado automaticamente
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) {
 		
 		String argument = "botao";
+	
+		/*
+		 * 
+		 * Exatamente igual ao que esta na classe AirQualitySensorZirk
+		 * 
+		 * */
 		BezirkMiddleware.initialize();
 		Bezirk b = BezirkMiddleware.registerZirk(argument);
+		
 		Button button = new Button();
 		b.sendEvent(button);
 		
