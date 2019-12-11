@@ -11,7 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Utilidades {
@@ -22,9 +21,6 @@ public class Utilidades {
 	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
 
 	public static void main(String[] args) throws IOException, ParseException {
-
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		System.out.println(validateDeadline("09-12-2019 15:38"));
 
 	}
 
@@ -43,7 +39,7 @@ public class Utilidades {
 		if (!f.exists()) {
 			f.createNewFile();
 		}
-		
+
 		int minutos = (int) ((Integer.parseInt(periodicidade) / 1000) / 60);
 		int horas = (int) ((Integer.parseInt(periodicidade) / 1000) / 60) / 60;
 		// 28800000 milissegundos -> 8 horas
@@ -51,8 +47,8 @@ public class Utilidades {
 
 		FileWriter fw = new FileWriter("warning.txt", true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + horas + " em " + horas
-				+ " horas ");
+		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + periodicidade + " em " + periodicidade
+				+ " milissegundos ");
 		out.newLine();
 		out.close();
 		fw.close();
@@ -97,10 +93,6 @@ public class Utilidades {
 		aux.close();
 		Files.delete(f.toPath());
 		fAux.renameTo(new File("warning.txt"));
-	}
-	
-	public static void showWarning() {
-		
 	}
 
 	/**
@@ -246,7 +238,6 @@ public class Utilidades {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 
 			String st;
-
 			while ((st = br.readLine()) != null) {
 				String[] splitContact = st.split(":");
 				contacts.put(splitContact[0], splitContact[1]);
@@ -256,33 +247,33 @@ public class Utilidades {
 
 		return contacts;
 	}
-	
-	
+
 	public static boolean isDate(String date) {
 		return DATE_PATTERN.matcher(date).matches();
-	
 	}
-	
-	
-	//Não está correcta esta verificação refazer TODO
-	public static boolean validateDeadline(String other) {
-		
-		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		Date date = new Date();
-		Date otherDate;
-		try { // se a date for depois da data do alarme no ficheiro, entao tocar alarme
-			otherDate = fmt.parse(other);
-			return date.after(otherDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return false;
+
+	/**
+	 * Verifica se a data AGORA eh superior a data do fim do warning. Se for,
+	 * cancela o warning.
+	 * 
+	 * @param other data fim do warning
+	 * @return
+	 */
+	public static boolean validateDeadline(Date other) {
+		Date date = new Date(); // data AGORA
+		return date.after(other);
 	}
-	
 
-	
-	
-	
-	
-
+	/**
+	 * Verifica se a data AGORA eh superior a data do inicio do warning. Se for,
+	 * entao deixa criar o warning e come�a a ser repetido de acordo com a
+	 * periodicidade.
+	 * 
+	 * @param before
+	 * @return
+	 */
+	public static boolean validateBeginning(Date before) {
+		Date date = new Date(); // data AGORA
+		return before.before(date);
+	}
 }
