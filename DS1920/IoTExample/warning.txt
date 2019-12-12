@@ -1,5 +1,2 @@
-Tomar Antibiotico de 09-12-2019 18:10 ate 09-12-2019 18:15 de 60000 em 60000 horas 
-Periodicidade de 09-12-2019 18:30 ate 09-12-2019 18:40 de 1 em 1 horas 
-Horas crl de 09-12-2019 18:40 ate 09-12-2019 18:50 de 1 em 1 minutos 
-Horaaaas de 09-12-2019 18:50 ate 09-12-2019 18:55 de 480 em 480 minutos 
-Horas finalmente de 09-12-2019 18:55 ate 09-12-2019 19:00 de 8 em 8 horas 
+Tomar de 11-12-2019 17:44 ate 11-12-2019 17:50 de 60000 em 60000 milissegundos 
+Antiiiii de 11-12-2019 17:45 ate 11-12-2019 17:50 de 60000 em 60000 milissegundos 

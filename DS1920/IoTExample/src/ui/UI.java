@@ -2,7 +2,6 @@ package ui;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -32,13 +31,11 @@ public class UI extends Thread {
 		Scanner sc = new Scanner(System.in);
 		String input = "";
 		ArrayWarning = new ArrayList<Warning>();
-		
 
 		while (!input.equals("q")) {
 			BufferedReader br;
 			File r = new File("warning.txt");
 			if (r.exists()) {
-
 				try {
 					br = new BufferedReader(new FileReader("warning.txt"));
 					String st;
@@ -51,11 +48,8 @@ public class UI extends Thread {
 				}
 
 				for (int i = 0; i < ArrayWarning.size(); i++) {
-
 					ArrayWarning.get(i).setTimerWarning();
-
 				}
-
 			}
 
 			System.out.println(I18N.getString(Messages.WELCOME));
