@@ -12,7 +12,7 @@ public class HandleEvent implements EventReceiver {
 
 	@Override
 	public void receiveEvent(Event arg0, ZirkEndPoint arg1) {
-		
+		System.out.println("entrei receive event");
 		if(arg0 instanceof SensorBotao) {
 			System.out.println(I18N.getString(Messages.BUTTON_RECEIVED_EVENT));
 		}

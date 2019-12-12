@@ -8,20 +8,39 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Timer;
 
+import com.bezirk.middleware.Bezirk;
+import com.bezirk.middleware.java.proxy.BezirkMiddleware;
+import com.bezirk.middleware.messages.EventSet;
+
+import aspectJClasses.HandleEvent;
 import i18n.I18N;
 import i18n.Messages;
+import sensors.SensorBotao;
 import utilidades.Utilidades;
 import warnings.Warning;
 
 public class UI extends Thread {
 
-	private Timer t;
+	private Bezirk bezirk;
+	private static final String str = "UI";
 	private List<Warning> ArrayWarning;
+
+	public UI() {
+		BezirkMiddleware.initialize();
+		bezirk = BezirkMiddleware.registerZirk(str);
+
+		final EventSet subscribedEvents = new EventSet(SensorBotao.class);
+		HandleEvent handle = new HandleEvent();
+		subscribedEvents.setEventReceiver(handle);
+		bezirk.subscribe(subscribedEvents);
+	}
+
+
 
 	public static void main(String[] args) throws IOException {
 		UI ui = new UI();
+
 		ui.start();
 	}
 

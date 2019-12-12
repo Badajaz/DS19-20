@@ -1,6 +1,5 @@
 package sensors;
 
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,34 +11,33 @@ import i18n.I18N;
 import i18n.Messages;
 
 public class SensorBotao extends Event {
-	
-	
-	
+
 	/**
 	 * 
 	 * Criado automaticamente
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Bezirk b;
+
+	public SensorBotao() {
+		BezirkMiddleware.initialize();
+		b = BezirkMiddleware.registerZirk("botao");
+	}
 
 	public static void main(String[] args) {
-		
-		String argument = "botao";
-	
-		/*
-		 * 
-		 * Exatamente igual ao que esta na classe AirQualitySensorZirk
-		 * 
-		 * */
-		BezirkMiddleware.initialize();
-		Bezirk b = BezirkMiddleware.registerZirk(argument);
-		
-		SensorBotao button = new SensorBotao();
-		b.sendEvent(button);
+
+		SensorBotao sensor = new SensorBotao();
+		sensor.sendEvent();
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
 		LocalDateTime now = LocalDateTime.now();
-		System.out.println(I18N.getString(Messages.BUTTON_EVENT)+" "+dtf.format(now));
+		System.out.println(I18N.getString(Messages.BUTTON_EVENT) + " " + dtf.format(now));
+	}
+
+	public void sendEvent() {
+		SensorBotao button = new SensorBotao();
+		b.sendEvent(button);
 
 	}
 

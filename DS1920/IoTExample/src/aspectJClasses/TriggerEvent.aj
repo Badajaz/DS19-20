@@ -12,25 +12,27 @@ import utilidades.Utilidades;
 
 public aspect TriggerEvent {
 
-	
-	pointcut despoletaEvento(Event e): execution(* *.receiveEvent(*,*)) && args(e);
-	
-	 before (Event e) throws IOException: despoletaEvento(e){
+	pointcut despoletaEvento(Event e): execution(* *.receiveEvent(..)) && args(e,*);
+
+	 before (Event e) : despoletaEvento(e){
 		
-		 
 		if(e instanceof SensorBotao) {
-			HashMap <String,String>  contacts = Utilidades.populateContacts();
-			
-			for(String s :contacts.keySet()) {
-				System.out.println(I18N.getString(Messages.BUTTON_CONTACTS)+" "+s+contacts.get(s));
+			HashMap<String, String> contacts;
+			try {
+				contacts = Utilidades.populateContacts();
+				for(String s :contacts.keySet()) {
+					System.out.println(I18N.getString(Messages.BUTTON_CONTACTS)+" "+s+contacts.get(s));
+				}
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+		
 			
 			
 			
 		}
 		
 	}
-	
-	
-	
+
 }
