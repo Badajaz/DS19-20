@@ -1,4 +1,4 @@
-package botao;
+package sensors;
 
 
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ import com.bezirk.middleware.messages.Event;
 import i18n.I18N;
 import i18n.Messages;
 
-public class Button extends Event {
+public class SensorBotao extends Event {
 	
 	
 	
@@ -34,7 +34,7 @@ public class Button extends Event {
 		BezirkMiddleware.initialize();
 		Bezirk b = BezirkMiddleware.registerZirk(argument);
 		
-		Button button = new Button();
+		SensorBotao button = new SensorBotao();
 		b.sendEvent(button);
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
