@@ -8,6 +8,7 @@ import com.bezirk.middleware.messages.Event;
 import i18n.I18N;
 import i18n.Messages;
 import sensors.BotaoEvento;
+import sensors.LuzEvento;
 import utilidades.Utilidades;
 
 public aspect TriggerEvent {
@@ -21,7 +22,7 @@ public aspect TriggerEvent {
 			try {
 				contacts = Utilidades.populateContacts();
 				for (String s : contacts.keySet()) {
-					System.out.println(I18N.getString(Messages.BUTTON_CONTACTS) + " " + s + " " + contacts.get(s));
+					Utilidades.sendToContact(s,contacts.get(s));
 				}
 			} catch (IOException e1) {
 				e1.printStackTrace();

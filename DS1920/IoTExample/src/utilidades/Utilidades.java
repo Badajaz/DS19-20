@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import i18n.I18N;
+import i18n.Messages;
+
 public class Utilidades {
 
 	private static Pattern DATE_PATTERN = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
@@ -110,7 +113,6 @@ public class Utilidades {
 	 * @return verifica se a hora é válida
 	 */
 	public static boolean checkHour(String hour) {
-		System.out.println("check hour: " + hour);
 		String[] splitHour = hour.split(":");
 		int hora = Integer.parseInt(splitHour[0]);
 		int minuto = Integer.parseInt(splitHour[1]);
@@ -275,5 +277,9 @@ public class Utilidades {
 	public static boolean validateBeginning(Date before) {
 		Date date = new Date(); // data AGORA
 		return before.before(date);
+	}
+
+	public static void sendToContact(String s,String s1) {
+		System.out.println(I18N.getString(Messages.BUTTON_CONTACTS) + " " + s + " " + s1);
 	}
 }

@@ -1,4 +1,3 @@
-
 package sensors;
 
 import java.time.LocalDateTime;

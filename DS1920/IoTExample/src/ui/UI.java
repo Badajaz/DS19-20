@@ -11,12 +11,14 @@ import java.util.Scanner;
 
 import com.bezirk.middleware.Bezirk;
 import com.bezirk.middleware.java.proxy.BezirkMiddleware;
+import com.bezirk.middleware.messages.Event;
 import com.bezirk.middleware.messages.EventSet;
 
 import aspectJClasses.HandleEvent;
 import i18n.I18N;
 import i18n.Messages;
 import sensors.BotaoEvento;
+import sensors.LuzEvento;
 import utilidades.Utilidades;
 import warnings.Warning;
 
@@ -30,10 +32,25 @@ public class UI extends Thread {
 		BezirkMiddleware.initialize();
 		bezirk = BezirkMiddleware.registerZirk(str);
 
-		final EventSet subscribedEvents = new EventSet(BotaoEvento.class);
+		List<Class<? extends Event>> subs = new ArrayList<>();
+		subs.add(BotaoEvento.class);
+		subs.add(LuzEvento.class);
+		Class<? extends Event>[] array = toArray(subs);
+
+		final EventSet subscribedEvents = new EventSet(array);
 		HandleEvent handle = new HandleEvent();
 		subscribedEvents.setEventReceiver(handle);
 		bezirk.subscribe(subscribedEvents);
+	}
+
+	private Class<? extends Event>[] toArray(List<Class<? extends Event>> subs) {
+		Class<? extends Event>[] result = new Class[subs.size()];
+		int i = 0;
+		for (Class<? extends Event> c : subs) {
+			result[i] = c;
+			i++;
+		}
+		return result;
 	}
 
 	public static void main(String[] args) throws IOException {
