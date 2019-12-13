@@ -1,3 +1,4 @@
+
 package sensors;
 
 import java.time.LocalDateTime;
@@ -5,12 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 import com.bezirk.middleware.Bezirk;
 import com.bezirk.middleware.java.proxy.BezirkMiddleware;
-import com.bezirk.middleware.messages.Event;
 
 import i18n.I18N;
 import i18n.Messages;
 
-public class SensorBotao extends Event {
+public class SensorBotao {
 
 	/**
 	 * 
@@ -29,16 +29,15 @@ public class SensorBotao extends Event {
 
 		SensorBotao sensor = new SensorBotao();
 		sensor.sendEvent();
-		
+
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println(I18N.getString(Messages.BUTTON_EVENT) + " " + dtf.format(now));
 	}
 
 	public void sendEvent() {
-		SensorBotao button = new SensorBotao();
+		BotaoEvento button = new BotaoEvento();
 		b.sendEvent(button);
 
 	}
-
 }

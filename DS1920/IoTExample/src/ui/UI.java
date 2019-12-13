@@ -16,7 +16,7 @@ import com.bezirk.middleware.messages.EventSet;
 import aspectJClasses.HandleEvent;
 import i18n.I18N;
 import i18n.Messages;
-import sensors.SensorBotao;
+import sensors.BotaoEvento;
 import utilidades.Utilidades;
 import warnings.Warning;
 
@@ -30,13 +30,11 @@ public class UI extends Thread {
 		BezirkMiddleware.initialize();
 		bezirk = BezirkMiddleware.registerZirk(str);
 
-		final EventSet subscribedEvents = new EventSet(SensorBotao.class);
+		final EventSet subscribedEvents = new EventSet(BotaoEvento.class);
 		HandleEvent handle = new HandleEvent();
 		subscribedEvents.setEventReceiver(handle);
 		bezirk.subscribe(subscribedEvents);
 	}
-
-
 
 	public static void main(String[] args) throws IOException {
 		UI ui = new UI();

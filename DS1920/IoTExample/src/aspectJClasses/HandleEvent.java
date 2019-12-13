@@ -6,14 +6,13 @@ import com.bezirk.middleware.messages.EventSet.EventReceiver;
 
 import i18n.I18N;
 import i18n.Messages;
-import sensors.SensorBotao;
+import sensors.BotaoEvento;
 
 public class HandleEvent implements EventReceiver {
 
 	@Override
 	public void receiveEvent(Event arg0, ZirkEndPoint arg1) {
-		System.out.println("entrei receive event");
-		if(arg0 instanceof SensorBotao) {
+		if(arg0 instanceof BotaoEvento) {
 			System.out.println(I18N.getString(Messages.BUTTON_RECEIVED_EVENT));
 		}
 		
