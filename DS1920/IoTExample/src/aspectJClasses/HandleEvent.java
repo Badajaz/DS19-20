@@ -17,7 +17,7 @@ public class HandleEvent implements EventReceiver {
 			System.out.println(I18N.getString(Messages.BUTTON_RECEIVED_EVENT));
 		}
 		if (arg0 instanceof LuzEvento) {
-			System.err.println("RGB(0, 0, 255) --> Butao acionado");
+			System.err.println("RGB(0, 0, 255) --> Botao acionado");
 		}
 	}
 }

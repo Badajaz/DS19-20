@@ -95,6 +95,7 @@ public class UI extends Thread {
 			System.out.println(I18N.getString(Messages.OPT6));
 			input = sc.nextLine();
 
+			// TODO: acrescentar alterar contacto
 			if (Integer.parseInt(input) == 1) { // Criar aviso
 				Scanner sc1 = new Scanner(System.in);
 				String mensagem, dataInicio, dataFim, periodicidade;
