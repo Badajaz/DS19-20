@@ -141,7 +141,6 @@ public class Utilidades {
 	 * @return retorna se o numero eh valido
 	 */
 	public static boolean validateNumberContact(String number) {
-		System.out.println();
 		return number.length() == 9 && validatePeriodicity(number);
 	}
 
@@ -162,7 +161,7 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Inatividade durante " + duracao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
-		System.out.println("Padrao de inatividade inserido com sucesso!");
+		//System.out.println("Padrao de inatividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
@@ -186,7 +185,7 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Detecao de atividade na " + divisao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
-		System.out.println("Padrao de atividade inserido com sucesso!");
+		//System.out.println("Padrao de atividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();

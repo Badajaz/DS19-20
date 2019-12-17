@@ -142,6 +142,7 @@ public class UI extends Thread {
 
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
+					System.out.println(I18N.getString(Messages.CONTACTO_INSERT_SUCESSO));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -176,6 +177,7 @@ public class UI extends Thread {
 
 				try {
 					Utilidades.writeContacts(nomeContacto, numContacto);
+					System.out.println(I18N.getString(Messages.CONTACTO_INSERT_SUCESSO));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

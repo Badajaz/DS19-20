@@ -38,6 +38,7 @@ public class Warning {
 							int ate = warningText.indexOf("ate");
 							System.err.println(warningText.substring(HorasInicio + 14, ate - 1) + " - "
 									+ warningText.substring(0, HorasInicio));
+							//TODO: atualizar warning com hora correta.
 							try { // verifica se ja passou a data maxima para cancelar a repeticao do warning
 								cancelTimer();
 							} catch (ParseException e) {

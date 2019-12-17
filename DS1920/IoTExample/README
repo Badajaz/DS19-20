@@ -1,0 +1,6 @@
+README:
+
+Produto 2 - Produto para cegos, com voz em inglês e com dispositivo vestível com funcionalidade de botão:
+-> Apply Build Configuration ao ficheiro DispositivoVestivelFuncionalidadeBotao
+-> Executar a classe Ui.java
+-> Executar a classe SensorBotao.java
