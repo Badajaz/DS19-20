@@ -258,12 +258,12 @@ public class Utilidades {
 			try {
 				br = new BufferedReader(new FileReader("warning.txt"));
 				String st;
-
+				Warning warning = null;
 				while ((st = br.readLine()) != null) {
-					Warning warning = new Warning(st);
+					warning = new Warning(st);
 					ArrayWarning.add(warning);
-					warning.sendWarningEvent();
 				}
+				//warning.sendWarningEvent();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -297,9 +297,9 @@ public class Utilidades {
 	 * @param before
 	 * @return
 	 */
-	public static boolean validateBeginning(Date before) {
+	public static boolean validateBeginning(Date inicioWarning, Date fimWarning) {
 		Date date = new Date(); // data AGORA
-		return before.before(date);
+		return fimWarning.before(date);
 	}
 
 	public static void sendToContact(String s, String s1) {

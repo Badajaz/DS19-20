@@ -29,8 +29,11 @@ public aspect TriggerEvent {
 			}
 		}
 		if (e instanceof WarningEvento) {
+			System.out.println("entrei1");
 			ArrayList<Warning> ArrayWarning = Utilidades.populateWarnings();
+			System.out.println("entrei2");
 			for (int i = 0; i < ArrayWarning.size(); i++) {
+				System.out.println("entrei3");
 				ArrayWarning.get(i).setTimerWarning();
 			}
 		}

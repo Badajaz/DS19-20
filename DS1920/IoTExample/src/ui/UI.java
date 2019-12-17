@@ -21,6 +21,7 @@ import sensors.BotaoEvento;
 import sensors.LuzEvento;
 import utilidades.Utilidades;
 import warnings.Warning;
+import warnings.WarningEvento;
 
 public class UI extends Thread {
 
@@ -35,6 +36,7 @@ public class UI extends Thread {
 		List<Class<? extends Event>> subs = new ArrayList<>();
 		subs.add(BotaoEvento.class);
 		subs.add(LuzEvento.class);
+		subs.add(WarningEvento.class);
 		Class<? extends Event>[] array = toArray(subs);
 
 		final EventSet subscribedEvents = new EventSet(array);
@@ -126,7 +128,8 @@ public class UI extends Thread {
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
 					System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
-					Warning warning = new Warning("");
+					Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
+							+ periodicidade + " em " + periodicidade + " milissegundos ");
 					warning.sendWarningEvent();
 
 				} catch (IOException e) {

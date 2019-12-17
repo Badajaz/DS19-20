@@ -42,19 +42,20 @@ public class Warning {
 	public void setTimerWarning() {
 
 		if (!parameter.isEmpty()) {
-			String data = parameter.get(0).replace('-', '/') + " " + parameter.get(1);
+			String dataInicioWarning = parameter.get(0).replace('-', '/') + " " + parameter.get(1);
+			String dataFimWarning = parameter.get(2).replace('-', '/') + " " + parameter.get(3);
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			try {
-
-				Date date = sdf.parse(data);
-				if (Utilidades.validateBeginning(date)) {
+				Date dateInicioWarning = sdf.parse(dataInicioWarning);
+				Date dateFimWarning = sdf.parse(dataFimWarning);
+				if (!Utilidades.validateBeginning(dateInicioWarning, dateFimWarning)) {
 					TimerTask repeatedTask = new TimerTask() {
 						public void run() {
-							int HorasInicio = warningText.indexOf("de");
-							int ate = warningText.indexOf("ate");
-							System.err.println(warningText.substring(HorasInicio + 14, ate - 1) + " - "
-									+ warningText.substring(0, HorasInicio));
-							// TODO: atualizar warning com hora correta.
+							int HorasInicio = warningText.indexOf("de"); // index da hora inicial
+							Date horaActual = new Date();
+							SimpleDateFormat actual = new SimpleDateFormat("HH:mm");
+							System.err
+									.println(actual.format(horaActual) + " - " + warningText.substring(0, HorasInicio));
 
 							try { // verifica se ja passou a data maxima para cancelar a repeticao do warning
 								cancelTimer();
