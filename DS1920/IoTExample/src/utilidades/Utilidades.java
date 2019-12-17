@@ -22,14 +22,11 @@ public class Utilidades {
 
 	private static Pattern DATE_PATTERN = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
 
-	// private static Pattern HOUR_PATTERN =
-	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
-
 	public static void main(String[] args) throws IOException, ParseException {
 	}
 
 	/**
-	 * permite escrever o warning num formato para o ficheiro
+	 * Escrever o warning num formato para o ficheiro
 	 * 
 	 * @param mensagem
 	 * @param dataInicio
@@ -59,10 +56,9 @@ public class Utilidades {
 	}
 
 	/**
+	 * Faz delete a um warning
 	 * 
-	 * permite dar delete a um warning
-	 * 
-	 * @param mensagem - warning
+	 * @param mensagem - warning a apagar
 	 * @throws IOException
 	 */
 	public static void deleteWarning(String mensagem) throws IOException {
@@ -104,7 +100,6 @@ public class Utilidades {
 	 * @return retorna se o formato da data é v
 	 */
 	public static boolean validateDate(String date) {
-
 		String[] dateAndHours = date.split(" ");
 		return DATE_PATTERN.matcher(dateAndHours[0]).matches() && checkHour(dateAndHours[1]);
 	}
@@ -118,10 +113,11 @@ public class Utilidades {
 		int hora = Integer.parseInt(splitHour[0]);
 		int minuto = Integer.parseInt(splitHour[1]);
 		return hora >= 0 && hora <= 23 && minuto >= 0 && minuto <= 59;
-
 	}
 
 	/**
+	 * Valida a periodicidade
+	 * 
 	 * @param periodicity - duracao do periodo
 	 * @return retorna se o a periodicidade eh valida
 	 */
@@ -162,11 +158,9 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Inatividade durante " + duracao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
-		// System.out.println("Padrao de inatividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
-
 	}
 
 	/**
@@ -186,15 +180,13 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Detecao de atividade na " + divisao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
-		// System.out.println("Padrao de atividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
-
 	}
 
 	/**
-	 * Regista os contactos
+	 * Regista um contacto
 	 * 
 	 * @param nome   nome do contacto
 	 * @param numero numero do contacto
@@ -250,6 +242,12 @@ public class Utilidades {
 		return contacts;
 	}
 
+	/**
+	 * Popula warnings numa arraylist
+	 * 
+	 * @return arraylist com warnings
+	 * @throws IOException
+	 */
 	public static ArrayList<Warning> populateWarnings() throws IOException {
 		ArrayList<Warning> ArrayWarning = new ArrayList<>();
 		BufferedReader br;
@@ -263,16 +261,20 @@ public class Utilidades {
 					warning = new Warning(st);
 					ArrayWarning.add(warning);
 				}
-				//warning.sendWarningEvent();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 
-			
 		}
 		return ArrayWarning;
 	}
 
+	/**
+	 * Verifica se a data esta num formato valido
+	 * 
+	 * @param date data a validar formato
+	 * @return true se estiver. False caso contrario
+	 */
 	public static boolean isDate(String date) {
 		return DATE_PATTERN.matcher(date).matches();
 	}
@@ -302,10 +304,23 @@ public class Utilidades {
 		return fimWarning.before(date);
 	}
 
+	/**
+	 * Envia a mensagem para o contacto
+	 * 
+	 * @param s  nome do contacto
+	 * @param s1 numero do contacto
+	 */
 	public static void sendToContact(String s, String s1) {
 		System.out.println(I18N.getString(Messages.BUTTON_CONTACTS) + " " + s + " " + s1);
 	}
 
+	/**
+	 * Atualiza o numero do contacto
+	 * 
+	 * @param nomeContacto nome cujo numero deve ser atualizado
+	 * @param novoContacto numero que deve ser atualizado
+	 * @throws IOException
+	 */
 	public static void updateContact(String nomeContacto, String novoContacto) throws IOException {
 		File f = new File("contacts.txt");
 		if (!f.exists()) {
