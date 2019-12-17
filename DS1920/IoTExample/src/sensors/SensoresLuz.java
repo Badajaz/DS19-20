@@ -20,6 +20,5 @@ public class SensoresLuz {
 	public void sendLightEvent() {
 		LuzEvento lights = new LuzEvento();
 		b.sendEvent(lights);
-
 	}
 }

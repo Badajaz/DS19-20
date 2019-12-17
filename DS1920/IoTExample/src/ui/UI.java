@@ -1,8 +1,5 @@
 package ui;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,7 +25,6 @@ public class UI extends Thread {
 
 	private Bezirk bezirk;
 	private static final String str = "UI";
-	private List<Warning> ArrayWarning;
 
 	public UI() {
 		BezirkMiddleware.initialize();
@@ -112,8 +108,8 @@ public class UI extends Thread {
 						System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
 						dataFim = sc1.nextLine();
 					}
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+				} catch (ParseException e) {
+					e.printStackTrace();
 				}
 
 				System.out.println(I18N.getString(Messages.PERIODICIDADE_AVISO));
@@ -133,7 +129,6 @@ public class UI extends Thread {
 					Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
 							+ periodicidade + " em " + periodicidade + " milissegundos ");
 					warning.sendWarningEvent();
-
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -241,9 +236,7 @@ public class UI extends Thread {
 				}
 				sc7.close();
 			}
-
 		}
 		sc.close();
 	}
-
 }

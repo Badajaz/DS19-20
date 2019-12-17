@@ -37,6 +37,5 @@ public class SensorBotao {
 	public void sendEvent() {
 		BotaoEvento button = new BotaoEvento();
 		b.sendEvent(button);
-
 	}
 }
