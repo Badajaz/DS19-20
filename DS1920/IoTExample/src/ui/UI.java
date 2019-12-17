@@ -67,24 +67,6 @@ public class UI extends Thread {
 		ArrayWarning = new ArrayList<Warning>();
 
 		while (!input.equals("q")) {
-			BufferedReader br;
-			File r = new File("warning.txt");
-			if (r.exists()) {
-				try {
-					br = new BufferedReader(new FileReader("warning.txt"));
-					String st;
-
-					while ((st = br.readLine()) != null) {
-						ArrayWarning.add(new Warning(st));
-					}
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-
-				for (int i = 0; i < ArrayWarning.size(); i++) {
-					ArrayWarning.get(i).setTimerWarning();
-				}
-			}
 
 			System.out.println(I18N.getString(Messages.WELCOME));
 			System.out.println(I18N.getString(Messages.OPT1));
@@ -144,6 +126,9 @@ public class UI extends Thread {
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
 					System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
+					Warning warning = new Warning("");
+					warning.sendWarningEvent();
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

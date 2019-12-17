@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 import i18n.I18N;
 import i18n.Messages;
+import warnings.Warning;
 
 public class Utilidades {
 
@@ -246,6 +248,29 @@ public class Utilidades {
 		}
 
 		return contacts;
+	}
+
+	public static ArrayList<Warning> populateWarnings() throws IOException {
+		ArrayList<Warning> ArrayWarning = new ArrayList<>();
+		BufferedReader br;
+		File r = new File("warning.txt");
+		if (r.exists()) {
+			try {
+				br = new BufferedReader(new FileReader("warning.txt"));
+				String st;
+
+				while ((st = br.readLine()) != null) {
+					Warning warning = new Warning(st);
+					ArrayWarning.add(warning);
+					warning.sendWarningEvent();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+
+			
+		}
+		return ArrayWarning;
 	}
 
 	public static boolean isDate(String date) {

@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.bezirk.middleware.Bezirk;
+import com.bezirk.middleware.java.proxy.BezirkMiddleware;
+
 import i18n.I18N;
 import i18n.Messages;
 import utilidades.Utilidades;
@@ -19,10 +22,21 @@ public class Warning {
 	private String warningText;
 	private ArrayList<String> parameter;
 
+	/**
+	 * 
+	 * Criado automaticamente
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Bezirk b;
+
 	public Warning(String warningText) {
 		this.warningText = warningText;
 		t = new Timer();
 		parameter = getWarningParameters();
+
+		BezirkMiddleware.initialize();
+		b = BezirkMiddleware.registerZirk("botao");
 	}
 
 	public void setTimerWarning() {
@@ -40,7 +54,8 @@ public class Warning {
 							int ate = warningText.indexOf("ate");
 							System.err.println(warningText.substring(HorasInicio + 14, ate - 1) + " - "
 									+ warningText.substring(0, HorasInicio));
-							//TODO: atualizar warning com hora correta.
+							// TODO: atualizar warning com hora correta.
+
 							try { // verifica se ja passou a data maxima para cancelar a repeticao do warning
 								cancelTimer();
 							} catch (ParseException e) {
@@ -99,5 +114,10 @@ public class Warning {
 		params2.add(params.get(periodicidade));
 
 		return params2;
+	}
+
+	public void sendWarningEvent() {
+		WarningEvento we = new WarningEvento();
+		b.sendEvent(we);
 	}
 }

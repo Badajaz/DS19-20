@@ -8,6 +8,7 @@ import i18n.I18N;
 import i18n.Messages;
 import sensors.BotaoEvento;
 import sensors.LuzEvento;
+import warnings.WarningEvento;
 
 public class HandleEvent implements EventReceiver {
 
@@ -18,6 +19,9 @@ public class HandleEvent implements EventReceiver {
 		}
 		if (arg0 instanceof LuzEvento) {
 			System.err.println("RGB(0, 0, 255) --> Botao acionado");
+		}
+		if (arg0 instanceof WarningEvento) {
+			System.err.println("Recebi WarningEvento");
 		}
 	}
 }
