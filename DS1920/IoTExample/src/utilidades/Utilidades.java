@@ -24,7 +24,6 @@ public class Utilidades {
 	// Pattern.compile("(?:[01]\\\\d|2[0123]):(?:[012345]\\\\d)");
 
 	public static void main(String[] args) throws IOException, ParseException {
-
 	}
 
 	/**
@@ -161,7 +160,7 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Inatividade durante " + duracao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
-		//System.out.println("Padrao de inatividade inserido com sucesso!");
+		// System.out.println("Padrao de inatividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
@@ -185,7 +184,7 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write("Detecao de atividade na " + divisao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
-		//System.out.println("Padrao de atividade inserido com sucesso!");
+		// System.out.println("Padrao de atividade inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
@@ -278,7 +277,42 @@ public class Utilidades {
 		return before.before(date);
 	}
 
-	public static void sendToContact(String s,String s1) {
+	public static void sendToContact(String s, String s1) {
 		System.out.println(I18N.getString(Messages.BUTTON_CONTACTS) + " " + s + " " + s1);
+	}
+
+	public static void updateContact(String nomeContacto, String novoContacto) throws IOException {
+		File f = new File("contacts.txt");
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+
+		File fAux = new File("temp.txt");
+		if (!fAux.exists()) {
+			fAux.createNewFile();
+		}
+
+		FileWriter aux = new FileWriter(fAux, true);
+		BufferedReader in = new BufferedReader(new FileReader(f));
+		String linha;
+		StringBuilder sb = new StringBuilder();
+		while ((linha = in.readLine()) != null) {
+			if (linha.contains(nomeContacto)) {
+				sb.append(nomeContacto + ":" + novoContacto);
+				aux.write(sb.toString());
+				sb = new StringBuilder();
+			} else {
+				sb.append(linha);
+				aux.write(sb.toString());
+				sb = new StringBuilder();
+			}
+			aux.write("\n");
+		}
+
+		in.close();
+		aux.close();
+		Files.delete(f.toPath());
+		fAux.renameTo(new File("contacts.txt"));
+
 	}
 }

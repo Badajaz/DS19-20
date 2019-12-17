@@ -93,9 +93,9 @@ public class UI extends Thread {
 			System.out.println(I18N.getString(Messages.OPT4));
 			System.out.println(I18N.getString(Messages.OPT5));
 			System.out.println(I18N.getString(Messages.OPT6));
+			System.out.println(I18N.getString(Messages.OPT7));
 			input = sc.nextLine();
 
-			// TODO: acrescentar alterar contacto
 			if (Integer.parseInt(input) == 1) { // Criar aviso
 				Scanner sc1 = new Scanner(System.in);
 				String mensagem, dataInicio, dataFim, periodicidade;
@@ -229,6 +229,27 @@ public class UI extends Thread {
 				Scanner sc6 = new Scanner(System.in);
 				sc6.close();
 
+			} else if (Integer.parseInt(input) == 7) { // Modificar contacto
+				Scanner sc7 = new Scanner(System.in);
+				String nomeContacto, novoContacto;
+
+				System.out.println(I18N.getString(Messages.CONTACT_MODIFY_NAME));
+				nomeContacto = sc7.nextLine();
+				System.out.println(I18N.getString(Messages.CONTACT_MODIFY_NUMBER));
+				novoContacto = sc7.nextLine();
+
+				while (!Utilidades.validateNumberContact(novoContacto)) {
+					System.out.println(I18N.getString(Messages.CONTACT_MODIFY_NUMBER));
+					novoContacto = sc7.nextLine();
+				}
+
+				try {
+					Utilidades.updateContact(nomeContacto, novoContacto);
+					System.out.println(I18N.getString(Messages.CONTACTO_ALTERED_SUCESSO));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				sc7.close();
 			}
 
 		}
