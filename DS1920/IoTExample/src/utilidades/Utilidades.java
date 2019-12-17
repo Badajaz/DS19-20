@@ -268,7 +268,7 @@ public class Utilidades {
 				e2.printStackTrace();
 			}
 
-			
+
 		}
 		return ArrayWarning;
 	}
@@ -305,6 +305,10 @@ public class Utilidades {
 	public static void sendToContact(String s, String s1) {
 		System.out.println(I18N.getString(Messages.BUTTON_CONTACTS) + " " + s + " " + s1);
 	}
+	
+	public static void printActivityDetected(String divisao, String hora) {
+		System.out.println(I18N.getString(Messages.ACTIIVIDADE_DETECTADA) + " - " + s + " - " + hora);
+	}
 
 	public static void updateContact(String nomeContacto, String novoContacto) throws IOException {
 		File f = new File("contacts.txt");
@@ -340,4 +344,36 @@ public class Utilidades {
 		fAux.renameTo(new File("contacts.txt"));
 
 	}
+
+	public static HashMap<String, String> populateActivity() throws IOException {
+
+		HashMap<String, String> activitys = new HashMap<>();
+
+		File file = new File("atividades.txt");
+		if (file.exists()) {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+
+			String st;
+			while ((st = br.readLine()) != null) {
+				String[] splitActivity = st.split(" ");
+				activitys.put(splitActivity[5], splitActivity[splitActivity.length-1]);
+			}
+			br.close();
+		}
+
+		return activitys;
+	}
+
+	public static boolean CheckActivityPeriod(String hora, String periodo) throws ParseException {
+		
+		String[] periodBounds = periodo.split(",");
+		Date periodLowerBound = new SimpleDateFormat("HH:mm").parse(periodBounds[0]);
+		Date periodUpperBound = new SimpleDateFormat("HH:mm").parse(periodBounds[1]);
+		Date hour =new SimpleDateFormat("HH:mm").parse(hora);
+
+		return hour.after(periodLowerBound) && hour.before(periodUpperBound); 	
+	}
+
+
+
 }

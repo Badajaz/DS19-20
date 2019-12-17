@@ -1,11 +1,15 @@
 package aspectJClasses;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import com.bezirk.middleware.messages.Event;
 
+import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import utilidades.Utilidades;
 import warnings.Warning;
@@ -29,13 +33,36 @@ public aspect TriggerEvent {
 			}
 		}
 		if (e instanceof WarningEvento) {
-			System.out.println("entrei1");
 			ArrayList<Warning> ArrayWarning = Utilidades.populateWarnings();
-			System.out.println("entrei2");
 			for (int i = 0; i < ArrayWarning.size(); i++) {
-				System.out.println("entrei3");
 				ArrayWarning.get(i).setTimerWarning();
 			}
 		}
+
+		if (e instanceof ActividadeEvento) {
+			ActividadeEvento  ae = (ActividadeEvento) e;
+			String divisao = ae.getDivisao();
+			Date hour = ae.getClock();
+			SimpleDateFormat dtf = new SimpleDateFormat("HH:mm");
+			System.out.println(divisao  +"Trigger Event");
+
+			HashMap<String, String> actividades;
+			try {
+				contacts = Utilidades.populateActivity();
+				for (String s : contacts.keySet()) {
+					if (s.toUpperCase().equals(divisao.toUpperCase()) &&
+							Utilidades.CheckActivityPeriod(dtf.format(hour),actividades.get(s))) {
+
+						Utilidades.printActivityDetected(divisao,dtf.format(hour));
+					}
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+
+
+		}
+
 	}
 }

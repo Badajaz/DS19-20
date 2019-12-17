@@ -6,6 +6,7 @@ import com.bezirk.middleware.messages.EventSet.EventReceiver;
 
 import i18n.I18N;
 import i18n.Messages;
+import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import sensors.LuzEvento;
 import warnings.WarningEvento;
@@ -23,5 +24,9 @@ public class HandleEvent implements EventReceiver {
 		if (arg0 instanceof WarningEvento) {
 			System.err.println("Recebi WarningEvento");
 		}
+		if (arg0 instanceof ActividadeEvento) {
+			System.err.println("Recebi ActividadeEvento");
+		}
+		
 	}
 }

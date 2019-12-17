@@ -17,6 +17,7 @@ import com.bezirk.middleware.messages.EventSet;
 import aspectJClasses.HandleEvent;
 import i18n.I18N;
 import i18n.Messages;
+import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import sensors.LuzEvento;
 import utilidades.Utilidades;
@@ -37,6 +38,7 @@ public class UI extends Thread {
 		subs.add(BotaoEvento.class);
 		subs.add(LuzEvento.class);
 		subs.add(WarningEvento.class);
+		subs.add(ActividadeEvento.class);
 		Class<? extends Event>[] array = toArray(subs);
 
 		final EventSet subscribedEvents = new EventSet(array);
