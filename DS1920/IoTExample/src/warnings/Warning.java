@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import i18n.I18N;
+import i18n.Messages;
 import utilidades.Utilidades;
 
 public class Warning {
@@ -72,7 +74,7 @@ public class Warning {
 		Date date = sdf.parse(dateStr);
 
 		if (Utilidades.validateDeadline(date)) {
-			System.out.println("Vou cancelar o warning!");
+			System.out.println(I18N.getString(Messages.CANCEL_WARNING));
 			t.cancel();
 		}
 	}

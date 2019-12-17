@@ -142,7 +142,7 @@ public class UI extends Thread {
 
 				try {
 					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
-					System.out.println(I18N.getString(Messages.CONTACTO_INSERT_SUCESSO));
+					System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -156,6 +156,7 @@ public class UI extends Thread {
 
 				try {
 					Utilidades.deleteWarning(mensagem);
+					System.out.println(I18N.getString(Messages.WARNING_DELETE_SUCESSO));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -195,6 +196,7 @@ public class UI extends Thread {
 
 				try {
 					Utilidades.writePadraoInatividade(duracao, horaInicio, horaFim);
+					System.out.println(I18N.getString(Messages.PADRAO_INATIVIDADE_INSERT_SUCESSO));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -214,6 +216,7 @@ public class UI extends Thread {
 				try {
 					if (Utilidades.checkHour(horaInicio) && Utilidades.checkHour(horaFim)) {
 						Utilidades.writePadraoAtividade(divisao, horaInicio, horaFim);
+						System.out.println(I18N.getString(Messages.PADRAO_ATIVIDADE_INSERT_SUCESSO));
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
