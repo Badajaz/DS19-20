@@ -313,9 +313,9 @@ public class Utilidades {
 	public static void sendToContact(String s, String s1) {
 		System.out.println(I18N.getString(Messages.BUTTON_CONTACTS) + " " + s + " " + s1);
 	}
-	
+
 	public static void printActivityDetected(String divisao, String hora) {
-		System.out.println(I18N.getString(Messages.ACTIIVIDADE_DETECTADA) + " - " + s + " - " + hora);
+		System.out.println(I18N.getString(Messages.ACTIVIDADE_EVENT) + " - " + divisao + " - " + hora);
 	}
 
 	/**
@@ -360,8 +360,13 @@ public class Utilidades {
 
 	}
 
+	/**
+	 * Popula activies num hashmap
+	 * 
+	 * @return hashmap de activies com chave divisao e valor duracao
+	 * @throws IOException
+	 */
 	public static HashMap<String, String> populateActivity() throws IOException {
-
 		HashMap<String, String> activitys = new HashMap<>();
 
 		File file = new File("atividades.txt");
@@ -371,7 +376,7 @@ public class Utilidades {
 			String st;
 			while ((st = br.readLine()) != null) {
 				String[] splitActivity = st.split(" ");
-				activitys.put(splitActivity[5], splitActivity[splitActivity.length-1]);
+				activitys.put(splitActivity[4], splitActivity[splitActivity.length - 1]);
 			}
 			br.close();
 		}
@@ -379,16 +384,27 @@ public class Utilidades {
 		return activitys;
 	}
 
-	public static boolean CheckActivityPeriod(String hora, String periodo) throws ParseException {
-		
+	/**
+	 * Verifica o periodo da actividade.
+	 * 
+	 * @param hora    hora atual
+	 * @param periodo periodo da atividade
+	 * @return true se hora estiver dentro do periodo. False caso contrario
+	 */
+	public static boolean CheckActivityPeriod(String hora, String periodo) {
 		String[] periodBounds = periodo.split(",");
-		Date periodLowerBound = new SimpleDateFormat("HH:mm").parse(periodBounds[0]);
-		Date periodUpperBound = new SimpleDateFormat("HH:mm").parse(periodBounds[1]);
-		Date hour =new SimpleDateFormat("HH:mm").parse(hora);
-
-		return hour.after(periodLowerBound) && hour.before(periodUpperBound); 	
+		Date periodLowerBound;
+		Date periodUpperBound;
+		try {
+			periodLowerBound = new SimpleDateFormat("HH:mm")
+					.parse(periodBounds[0].substring(1, periodBounds[0].length()));
+			periodUpperBound = new SimpleDateFormat("HH:mm")
+					.parse(periodBounds[1].substring(0, periodBounds[1].length() - 1));
+			Date hour = new SimpleDateFormat("HH:mm").parse(hora);
+			return hour.after(periodLowerBound) && hour.before(periodUpperBound);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
-
-
-
 }

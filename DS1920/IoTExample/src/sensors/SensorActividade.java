@@ -1,7 +1,8 @@
 package sensors;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Scanner;
 
 import com.bezirk.middleware.Bezirk;
@@ -12,7 +13,6 @@ import i18n.Messages;
 
 public class SensorActividade {
 
-	
 	private Bezirk b;
 
 	public SensorActividade() {
@@ -21,24 +21,22 @@ public class SensorActividade {
 	}
 
 	public static void main(String[] args) {
-		
+
 		Scanner sc = new Scanner(System.in);
-		System.out.println(I18N.getString(Messages.ASK_DIVISAO));
+		System.out.println(I18N.getString(Messages.DIVISAO_ATIVIDADE));
 		String divisao = sc.nextLine();
-		
-		SensorActividade sensor = newSensorActividade();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+
+		SensorActividade sensor = new SensorActividade();
 		Date now = new Date();
-		sensor.sendActivityEvent(divisao, dtf.format(now));
+		sensor.sendActivityEvent(divisao, now);
 		sc.close();
-		
-		
+
 	}
 
-	public void sendActivityEvent(String divisao, Date now ) {
-		ActividadeEvento ae = new ActividadeEvento(divisao, clock);
+	public void sendActivityEvent(String divisao, Date now) {
+		ActividadeEvento ae = new ActividadeEvento(divisao, now);
 		b.sendEvent(ae);
 		System.out.println(I18N.getString(Messages.ACTIVIDADE_EVENT));
 	}
-	
+
 }

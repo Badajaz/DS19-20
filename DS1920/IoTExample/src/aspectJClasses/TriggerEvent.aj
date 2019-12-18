@@ -2,7 +2,6 @@ package aspectJClasses;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,29 +39,23 @@ public aspect TriggerEvent {
 		}
 
 		if (e instanceof ActividadeEvento) {
-			ActividadeEvento  ae = (ActividadeEvento) e;
+			ActividadeEvento ae = (ActividadeEvento) e;
 			String divisao = ae.getDivisao();
 			Date hour = ae.getClock();
 			SimpleDateFormat dtf = new SimpleDateFormat("HH:mm");
-			System.out.println(divisao  +"Trigger Event");
 
 			HashMap<String, String> actividades;
 			try {
-				contacts = Utilidades.populateActivity();
-				for (String s : contacts.keySet()) {
-					if (s.toUpperCase().equals(divisao.toUpperCase()) &&
-							Utilidades.CheckActivityPeriod(dtf.format(hour),actividades.get(s))) {
-
-						Utilidades.printActivityDetected(divisao,dtf.format(hour));
+				actividades = Utilidades.populateActivity();
+				for (String s : actividades.keySet()) {
+					if (s.toUpperCase().equals(divisao.toUpperCase())
+							&& Utilidades.CheckActivityPeriod(dtf.format(hour), actividades.get(s))) {
+						Utilidades.printActivityDetected(divisao, dtf.format(hour));
 					}
 				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
-
-
 		}
-
 	}
 }

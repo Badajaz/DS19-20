@@ -16,17 +16,16 @@ public class HandleEvent implements EventReceiver {
 	@Override
 	public void receiveEvent(Event arg0, ZirkEndPoint arg1) {
 		if (arg0 instanceof BotaoEvento) {
-			System.out.println(I18N.getString(Messages.BUTTON_RECEIVED_EVENT));
+			System.err.println(I18N.getString(Messages.BUTTON_RECEIVED_EVENT));
 		}
 		if (arg0 instanceof LuzEvento) {
 			System.err.println("RGB(0, 0, 255) --> Botao acionado");
 		}
 		if (arg0 instanceof WarningEvento) {
-			System.err.println("Recebi WarningEvento");
+			System.err.println(I18N.getString(Messages.WARNING_RECEIVED_EVENT));
 		}
 		if (arg0 instanceof ActividadeEvento) {
-			System.err.println("Recebi ActividadeEvento");
+			System.err.println(I18N.getString(Messages.ACTIVITY_RECEIVED_EVENT));
 		}
-		
 	}
 }

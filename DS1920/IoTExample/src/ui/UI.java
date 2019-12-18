@@ -64,7 +64,6 @@ public class UI extends Thread {
 
 		Scanner sc = new Scanner(System.in);
 		String input = "";
-		ArrayWarning = new ArrayList<Warning>();
 
 		while (!input.equals("q")) {
 
