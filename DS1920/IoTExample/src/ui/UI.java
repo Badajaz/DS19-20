@@ -63,9 +63,10 @@ public class UI extends Thread {
 	public void run() {
 
 		Scanner sc = new Scanner(System.in);
-		String input = "";
+		boolean acabou = false;
+		int input = 0;
 
-		while (!input.equals("q")) {
+		while (!acabou) {
 
 			System.out.println(I18N.getString(Messages.WELCOME));
 			System.out.println(I18N.getString(Messages.OPT1));
@@ -75,9 +76,10 @@ public class UI extends Thread {
 			System.out.println(I18N.getString(Messages.OPT5));
 			System.out.println(I18N.getString(Messages.OPT6));
 			System.out.println(I18N.getString(Messages.OPT7));
-			input = sc.nextLine();
+			System.out.println(I18N.getString(Messages.QUIT));
+			input = sc.nextInt();
 
-			if (Integer.parseInt(input) == 1) { // Criar aviso
+			if (input == 1) { // Criar aviso
 				Scanner sc1 = new Scanner(System.in);
 				String mensagem, dataInicio, dataFim, periodicidade;
 
@@ -132,8 +134,7 @@ public class UI extends Thread {
 					e.printStackTrace();
 				}
 
-				sc1.close();
-			} else if (Integer.parseInt(input) == 2) { // Apagar aviso
+			} else if (input == 2) { // Apagar aviso
 				Scanner sc2 = new Scanner(System.in);
 				String mensagem;
 				System.out.println(I18N.getString(Messages.MENSAGEM_AVISO));
@@ -146,8 +147,7 @@ public class UI extends Thread {
 					e.printStackTrace();
 				}
 
-				sc2.close();
-			} else if (Integer.parseInt(input) == 3) { // Criar novo contacto
+			} else if (input == 3) { // Criar novo contacto
 				Scanner sc3 = new Scanner(System.in);
 				String nomeContacto, numContacto;
 
@@ -168,8 +168,7 @@ public class UI extends Thread {
 					e.printStackTrace();
 				}
 
-				sc3.close();
-			} else if (Integer.parseInt(input) == 4) { // Criar padrao de inatividade
+			} else if (input == 4) { // Criar padrao de inatividade
 				Scanner sc4 = new Scanner(System.in);
 				String duracao, horaInicio, horaFim;
 				System.out.println(I18N.getString(Messages.DURACAO));
@@ -186,8 +185,7 @@ public class UI extends Thread {
 					e.printStackTrace();
 				}
 
-				sc4.close();
-			} else if (Integer.parseInt(input) == 5) { // Criar padrao de atividade
+			} else if (input == 5) { // Criar padrao de atividade
 				Scanner sc5 = new Scanner(System.in);
 
 				String divisao, horaInicio, horaFim;
@@ -207,13 +205,10 @@ public class UI extends Thread {
 					e.printStackTrace();
 				}
 
-				sc5.close();
-
-			} else if (Integer.parseInt(input) == 6) { // Simular evento de inatividade
+			} else if (input == 6) { // Simular evento de inatividade
 				Scanner sc6 = new Scanner(System.in);
-				sc6.close();
 
-			} else if (Integer.parseInt(input) == 7) { // Modificar contacto
+			} else if (input == 7) { // Modificar contacto
 				Scanner sc7 = new Scanner(System.in);
 				String nomeContacto, novoContacto;
 
@@ -233,9 +228,11 @@ public class UI extends Thread {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				sc7.close();
+			} else if (input == 8) {
+				System.out.println(I18N.getString(Messages.GOODBYE));
+				acabou = true;
+				// TODO: fazer o acabar
 			}
 		}
-		sc.close();
 	}
 }

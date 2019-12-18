@@ -18,7 +18,7 @@ public aspect TriggerEvent {
 
 	pointcut despoletaEvento(Event e): execution(* *.receiveEvent(..)) && args(e,*);
 
-	after(Event e) throws IOException : despoletaEvento(e){
+	after(Event e) : despoletaEvento(e){
 
 		if (e instanceof BotaoEvento) {
 			HashMap<String, String> contacts;
@@ -32,9 +32,14 @@ public aspect TriggerEvent {
 			}
 		}
 		if (e instanceof WarningEvento) {
-			ArrayList<Warning> ArrayWarning = Utilidades.populateWarnings();
-			for (int i = 0; i < ArrayWarning.size(); i++) {
-				ArrayWarning.get(i).setTimerWarning();
+			ArrayList<Warning> ArrayWarning;
+			try {
+				ArrayWarning = Utilidades.populateWarnings();
+				for (int i = 0; i < ArrayWarning.size(); i++) {
+					ArrayWarning.get(i).setTimerWarning();
+				}
+			} catch (IOException e2) {
+				e2.printStackTrace();
 			}
 		}
 

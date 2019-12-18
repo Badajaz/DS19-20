@@ -201,7 +201,6 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write(nome + ":" + numero);
-		System.out.println("Contacto inserido com sucesso!");
 		out.newLine();
 		out.close();
 		fw.close();
@@ -216,7 +215,6 @@ public class Utilidades {
 		Date endDate = sdf2.parse(end);
 
 		return beginDate.before(endDate);
-
 	}
 
 	/**
@@ -292,16 +290,13 @@ public class Utilidades {
 	}
 
 	/**
-	 * Verifica se a data AGORA eh superior a data do inicio do warning. Se for,
-	 * entao deixa criar o warning e começa a ser repetido de acordo com a
-	 * periodicidade.
 	 * 
 	 * @param before
 	 * @return
 	 */
 	public static boolean validateBeginning(Date inicioWarning, Date fimWarning) {
 		Date date = new Date(); // data AGORA
-		return fimWarning.before(date);
+		return date.before(fimWarning);
 	}
 
 	/**

@@ -48,7 +48,7 @@ public class Warning {
 			try {
 				Date dateInicioWarning = sdf.parse(dataInicioWarning);
 				Date dateFimWarning = sdf.parse(dataFimWarning);
-				if (!Utilidades.validateBeginning(dateInicioWarning, dateFimWarning)) {
+				if (Utilidades.validateBeginning(dateInicioWarning, dateFimWarning)) {
 					TimerTask repeatedTask = new TimerTask() {
 						public void run() {
 							int HorasInicio = warningText.indexOf("de"); // index da hora inicial
