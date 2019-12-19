@@ -21,6 +21,7 @@ import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import sensors.LuzEvento;
 import utilidades.Utilidades;
+import warnings.AdicionarWarningEvento;
 import warnings.Warning;
 import warnings.WarningEvento;
 
@@ -40,6 +41,7 @@ public class UI extends Thread {
 		subs.add(ActividadeEvento.class);
 		subs.add(AdicionarContactoEvento.class);
 		subs.add(ModificarContactoEvento.class);
+		subs.add(AdicionarWarningEvento.class);
 		Class<? extends Event>[] array = toArray(subs);
 
 		final EventSet subscribedEvents = new EventSet(array);
@@ -126,18 +128,9 @@ public class UI extends Thread {
 					periodicidade = sc1.nextLine();
 				}
 
-				String horaInicio = dataInicio.substring(11); // inicio da hora na string dataInicio
-				String horaFim = dataFim.substring(11); // inicio da hora na string dataInicio
-
-//				try {
-//					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
-//					System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
-//					Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
-//							+ periodicidade + " em " + periodicidade + " milissegundos ");
-//					warning.sendWarningEvent();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
+				Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
+						+ periodicidade + " em " + periodicidade + " milissegundos ");
+				warning.addWarningEvent(mensagem, dataInicio, dataFim, periodicidade);
 
 			} else if (input == 2) { // Apagar aviso
 				Scanner sc2 = new Scanner(System.in);

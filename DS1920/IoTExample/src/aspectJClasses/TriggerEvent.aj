@@ -13,6 +13,7 @@ import contactos.ModificarContactoEvento;
 import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import utilidades.Utilidades;
+import warnings.AdicionarWarningEvento;
 import warnings.Warning;
 import warnings.WarningEvento;
 
@@ -33,6 +34,25 @@ public aspect TriggerEvent {
 				e1.printStackTrace();
 			}
 		}
+
+		if (e instanceof AdicionarWarningEvento) {
+			AdicionarWarningEvento awe = (AdicionarWarningEvento) e;
+			String mensagem, dataInicio, dataFim, periodicidade;
+			mensagem = awe.getMensagem();
+			dataInicio = awe.getDataInicio();
+			dataFim = awe.getDataFim();
+			periodicidade = awe.getPeriodicidade();
+			try {
+
+				Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
+				Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
+						+ periodicidade + " em " + periodicidade + " milissegundos ");
+				warning.sendWarningEvent();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+
 		if (e instanceof WarningEvento) {
 			ArrayList<Warning> ArrayWarning;
 			try {
@@ -84,6 +104,6 @@ public aspect TriggerEvent {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} 
+		}
 	}
 }

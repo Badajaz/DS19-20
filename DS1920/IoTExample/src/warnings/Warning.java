@@ -21,7 +21,7 @@ public class Warning {
 	private Timer t;
 	private String warningText;
 	private ArrayList<String> parameter;
-	
+
 	/**
 	 * 
 	 * Criado automaticamente
@@ -36,7 +36,7 @@ public class Warning {
 		parameter = getWarningParameters();
 
 		BezirkMiddleware.initialize();
-		b = BezirkMiddleware.registerZirk("botao");
+		b = BezirkMiddleware.registerZirk("warning");
 	}
 
 	public void setTimerWarning() {
@@ -90,7 +90,6 @@ public class Warning {
 		Date date = sdf.parse(dateStr);
 
 		if (Utilidades.validateDeadline(date)) {
-			System.out.println(I18N.getString(Messages.CANCEL_WARNING));
 			t.cancel();
 		}
 	}
@@ -121,8 +120,9 @@ public class Warning {
 		WarningEvento we = new WarningEvento();
 		b.sendEvent(we);
 	}
-	
-	public void addWarningEvent() {
-		
+
+	public void addWarningEvent(String mensagem, String dataInicio, String dataFim, String periodicidade) {
+		AdicionarWarningEvento awe = new AdicionarWarningEvento(mensagem, dataInicio, dataFim, periodicidade);
+		b.sendEvent(awe);
 	}
 }

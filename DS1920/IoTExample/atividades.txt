@@ -1,1 +1,2 @@
 Detecao de atividade na Cozinha no periodo [18:00,20:00]
+Detecao de atividade na Cozinha no periodo [13:00,17:00]

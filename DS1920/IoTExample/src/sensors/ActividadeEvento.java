@@ -25,8 +25,4 @@ public class ActividadeEvento extends Event {
 	public Date getClock() {
 		return clock;
 	}
-	
-	
-	
-
 }

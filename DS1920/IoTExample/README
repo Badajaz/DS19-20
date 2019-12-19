@@ -16,6 +16,6 @@ Produto 3- Monitor de Atividade com Lâmpadas para Surdos
 ->
 
 Produto 4- Dispositivo Vestível com Botão para Surdos
-->
-->
-->
+-> Apply Build Configuration ao ficheiro DispositivoVestivelFuncionalidadeBotaoSurdos
+-> Executar a classe Ui.java
+-> Executar a classe SensorBotao.java

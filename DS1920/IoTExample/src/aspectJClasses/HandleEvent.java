@@ -22,7 +22,19 @@ public class HandleEvent implements EventReceiver {
 			System.err.println(I18N.getString(Messages.BUTTON_RECEIVED_EVENT));
 		}
 		if (arg0 instanceof LuzEvento) {
-			System.err.println("RGB(0, 0, 255) --> Botao acionado");
+			LuzEvento e = (LuzEvento) arg0;
+			if (e.getEvento().equals("botao")) {
+				System.err.println("RGB(0, 0, 255) --> Botao acionado");
+			}
+			if (e.getEvento().equals("warning")) {
+				System.err.println("RGB(255, 255, 255) --> Warning acionado");
+			}
+			if (e.getEvento().equals("actividade")) {
+				System.err.println("RGB(255, 0, 0) --> Actividade acionado");
+			}
+			if (e.getEvento().equals("contacto")) {
+				System.err.println("RGB(0, 0, 255) --> Contacto acionado");
+			}
 		}
 		if (arg0 instanceof WarningEvento) {
 			System.err.println(I18N.getString(Messages.WARNING_RECEIVED_EVENT));

@@ -50,6 +50,7 @@ public class Utilidades {
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + periodicidade + " em " + periodicidade
 				+ " milissegundos ");
+		System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
 		out.newLine();
 		out.close();
 		fw.close();
@@ -287,6 +288,9 @@ public class Utilidades {
 	 */
 	public static boolean validateDeadline(Date other) {
 		Date date = new Date(); // data AGORA
+		if (date.after(other)) {
+			System.out.println(I18N.getString(Messages.CANCEL_WARNING));
+		}
 		return date.after(other);
 	}
 

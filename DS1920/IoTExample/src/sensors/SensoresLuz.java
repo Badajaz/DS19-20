@@ -17,8 +17,8 @@ public class SensoresLuz {
 		b = BezirkMiddleware.registerZirk("luz");
 	}
 
-	public void sendLightEvent() {
-		LuzEvento lights = new LuzEvento();
+	public void sendLightEvent(String evento) {
+		LuzEvento lights = new LuzEvento(evento);
 		b.sendEvent(lights);
 	}
 }
