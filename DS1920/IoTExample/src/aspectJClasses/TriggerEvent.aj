@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 import com.bezirk.middleware.messages.Event;
 
+import contactos.AdicionarContactoEvento;
+import contactos.ModificarContactoEvento;
 import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import utilidades.Utilidades;
@@ -62,5 +64,26 @@ public aspect TriggerEvent {
 				e1.printStackTrace();
 			}
 		}
+
+		if (e instanceof AdicionarContactoEvento) {
+			AdicionarContactoEvento ace = (AdicionarContactoEvento) e;
+			String nome = ace.getNomeContacto();
+			String numero = ace.getNumContacto();
+			try {
+				Utilidades.writeContacts(nome, numero);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		if (e instanceof ModificarContactoEvento) {
+			ModificarContactoEvento mce = (ModificarContactoEvento) e;
+			String nome = mce.getNomeContacto();
+			String numero = mce.getNumContacto();
+			try {
+				Utilidades.updateContact(nome, numero);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} 
 	}
 }

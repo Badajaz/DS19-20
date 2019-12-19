@@ -12,6 +12,9 @@ import com.bezirk.middleware.messages.Event;
 import com.bezirk.middleware.messages.EventSet;
 
 import aspectJClasses.HandleEvent;
+import contactos.AdicionarContactoEvento;
+import contactos.Contacto;
+import contactos.ModificarContactoEvento;
 import i18n.I18N;
 import i18n.Messages;
 import sensors.ActividadeEvento;
@@ -35,6 +38,8 @@ public class UI extends Thread {
 		subs.add(LuzEvento.class);
 		subs.add(WarningEvento.class);
 		subs.add(ActividadeEvento.class);
+		subs.add(AdicionarContactoEvento.class);
+		subs.add(ModificarContactoEvento.class);
 		Class<? extends Event>[] array = toArray(subs);
 
 		final EventSet subscribedEvents = new EventSet(array);
@@ -124,15 +129,15 @@ public class UI extends Thread {
 				String horaInicio = dataInicio.substring(11); // inicio da hora na string dataInicio
 				String horaFim = dataFim.substring(11); // inicio da hora na string dataInicio
 
-				try {
-					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
-					System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
-					Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
-							+ periodicidade + " em " + periodicidade + " milissegundos ");
-					warning.sendWarningEvent();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
+//					System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
+//					Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
+//							+ periodicidade + " em " + periodicidade + " milissegundos ");
+//					warning.sendWarningEvent();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 
 			} else if (input == 2) { // Apagar aviso
 				Scanner sc2 = new Scanner(System.in);
@@ -161,12 +166,8 @@ public class UI extends Thread {
 					numContacto = sc3.nextLine();
 				}
 
-				try {
-					Utilidades.writeContacts(nomeContacto, numContacto);
-					System.out.println(I18N.getString(Messages.CONTACTO_INSERT_SUCESSO));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				Contacto c = new Contacto(nomeContacto, numContacto);
+				c.sendAddContactEvent();
 
 			} else if (input == 4) { // Criar padrao de inatividade
 				Scanner sc4 = new Scanner(System.in);
@@ -222,12 +223,9 @@ public class UI extends Thread {
 					novoContacto = sc7.nextLine();
 				}
 
-				try {
-					Utilidades.updateContact(nomeContacto, novoContacto);
-					System.out.println(I18N.getString(Messages.CONTACTO_ALTERED_SUCESSO));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				Contacto c = new Contacto(nomeContacto, novoContacto);
+				c.updateContactEvent();
+
 			} else if (input == 8) {
 				System.out.println(I18N.getString(Messages.GOODBYE));
 				acabou = true;

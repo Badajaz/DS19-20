@@ -201,6 +201,7 @@ public class Utilidades {
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
 		out.write(nome + ":" + numero);
+		System.out.println(I18N.getString(Messages.CONTACTO_INSERT_SUCESSO));
 		out.newLine();
 		out.close();
 		fw.close();
@@ -348,6 +349,7 @@ public class Utilidades {
 			aux.write("\n");
 		}
 
+		System.out.println(I18N.getString(Messages.CONTACTO_ALTERED_SUCESSO));
 		in.close();
 		aux.close();
 		Files.delete(f.toPath());

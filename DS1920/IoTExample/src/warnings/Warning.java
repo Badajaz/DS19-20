@@ -21,7 +21,7 @@ public class Warning {
 	private Timer t;
 	private String warningText;
 	private ArrayList<String> parameter;
-
+	
 	/**
 	 * 
 	 * Criado automaticamente
@@ -120,5 +120,9 @@ public class Warning {
 	public void sendWarningEvent() {
 		WarningEvento we = new WarningEvento();
 		b.sendEvent(we);
+	}
+	
+	public void addWarningEvent() {
+		
 	}
 }
