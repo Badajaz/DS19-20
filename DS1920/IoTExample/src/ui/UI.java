@@ -22,6 +22,7 @@ import sensors.BotaoEvento;
 import sensors.LuzEvento;
 import utilidades.Utilidades;
 import warnings.AdicionarWarningEvento;
+import warnings.DeleteWarningEvento;
 import warnings.Warning;
 import warnings.WarningEvento;
 
@@ -42,6 +43,7 @@ public class UI extends Thread {
 		subs.add(AdicionarContactoEvento.class);
 		subs.add(ModificarContactoEvento.class);
 		subs.add(AdicionarWarningEvento.class);
+		subs.add(DeleteWarningEvento.class);
 		Class<? extends Event>[] array = toArray(subs);
 
 		final EventSet subscribedEvents = new EventSet(array);
@@ -134,16 +136,48 @@ public class UI extends Thread {
 
 			} else if (input == 2) { // Apagar aviso
 				Scanner sc2 = new Scanner(System.in);
-				String mensagem;
+				String mensagem, dataInicio, dataFim, periodicidade;
 				System.out.println(I18N.getString(Messages.MENSAGEM_AVISO));
 				mensagem = sc2.nextLine();
+				System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
+				dataInicio = sc2.nextLine();
+
+				while (!Utilidades.validateDate(dataInicio)) {
+					System.out.println(I18N.getString(Messages.DATA_VALIDA));
+					dataInicio = sc2.nextLine();
+				}
+
+				System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
+				dataFim = sc2.nextLine();
+
+				while (!Utilidades.validateDate(dataFim)) {
+					System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
+					dataFim = sc2.nextLine();
+				}
 
 				try {
-					Utilidades.deleteWarning(mensagem);
-					System.out.println(I18N.getString(Messages.WARNING_DELETE_SUCESSO));
-				} catch (IOException e) {
+					while (!Utilidades.checkTimeLine(dataInicio, dataFim)) {
+						System.out.println(I18N.getString(Messages.DATA_INICIO_SUPERIOR));
+						System.out.println(I18N.getString(Messages.DATA_INICIO_AVISO));
+						dataInicio = sc2.nextLine();
+						System.out.println(I18N.getString(Messages.DATA_FIM_AVISO));
+						dataFim = sc2.nextLine();
+					}
+				} catch (ParseException e) {
 					e.printStackTrace();
 				}
+
+				System.out.println(I18N.getString(Messages.PERIODICIDADE_AVISO));
+				periodicidade = sc2.nextLine();
+
+				while (!Utilidades.validatePeriodicity(periodicidade)) {
+					System.out.println(I18N.getString(Messages.PERIODICIDADE_AVISO));
+					periodicidade = sc2.nextLine();
+				}
+
+				Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
+						+ periodicidade + " em " + periodicidade + " milissegundos ");
+				warning.deleteWarningEvent(mensagem, dataInicio, dataFim, periodicidade);
 
 			} else if (input == 3) { // Criar novo contacto
 				Scanner sc3 = new Scanner(System.in);

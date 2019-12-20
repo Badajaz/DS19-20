@@ -14,6 +14,7 @@ import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import utilidades.Utilidades;
 import warnings.AdicionarWarningEvento;
+import warnings.DeleteWarningEvento;
 import warnings.Warning;
 import warnings.WarningEvento;
 
@@ -43,11 +44,26 @@ public aspect TriggerEvent {
 			dataFim = awe.getDataFim();
 			periodicidade = awe.getPeriodicidade();
 			try {
-
 				Utilidades.writeWarning(mensagem, dataInicio, dataFim, periodicidade);
 				Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
 						+ periodicidade + " em " + periodicidade + " milissegundos ");
 				warning.sendWarningEvent();
+				
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		if (e instanceof DeleteWarningEvento) {
+			System.out.println("trigger deleteWarningEvento");
+			DeleteWarningEvento dwe = (DeleteWarningEvento) e;
+			String mensagem, dataInicio, dataFim, periodicidade;
+			mensagem = dwe.getMensagem();
+			dataInicio = dwe.getDataInicio();
+			dataFim = dwe.getDataFim();
+			periodicidade = dwe.getPeriodicidade();
+			try {
+				Utilidades.deleteWarning(mensagem, dataInicio, dataFim, periodicidade);
+				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

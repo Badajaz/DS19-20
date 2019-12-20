@@ -59,10 +59,14 @@ public class Utilidades {
 	/**
 	 * Faz delete a um warning
 	 * 
-	 * @param mensagem - warning a apagar
+	 * @param mensagem      mensagem do warning
+	 * @param dataInicio    data inicio do warning
+	 * @param dataFim       data fim do warning
+	 * @param periodicidade periodicidade do warning
 	 * @throws IOException
 	 */
-	public static void deleteWarning(String mensagem) throws IOException {
+	public static void deleteWarning(String mensagem, String dataInicio, String dataFim, String periodicidade)
+			throws IOException {
 		File f = new File("warning.txt");
 		if (!f.exists()) {
 			f.createNewFile();
@@ -80,19 +84,24 @@ public class Utilidades {
 		StringBuilder sb = new StringBuilder();
 		while ((linha = in.readLine()) != null) {
 			if (!linha.contains(mensagem)) {
-				sb.append(linha);
+				sb.append(linha+"\n");
 				aux.write(sb.toString());
 				sb = new StringBuilder();
+				System.out.println(I18N.getString(Messages.WARNING_DELETE_SUCESSO));
 			} else {
 				aux.write(sb.toString());
 				sb = new StringBuilder();
 			}
 			aux.write("\n");
 		}
+		System.out.println("saí de tudo");
 
 		in.close();
+		System.out.println("fiz in.close");
 		aux.close();
+		System.out.println("fiz aux.close");
 		Files.delete(f.toPath());
+		System.out.println("fiz f.topath delete");
 		fAux.renameTo(new File("warning.txt"));
 	}
 
