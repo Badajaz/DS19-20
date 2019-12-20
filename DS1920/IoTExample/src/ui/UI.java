@@ -259,5 +259,6 @@ public class UI extends Thread {
 				// TODO: fazer o acabar
 			}
 		}
+		sc.close();
 	}
 }

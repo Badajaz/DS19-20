@@ -77,7 +77,7 @@ public class Utilidades {
 		if (!fAux.exists()) {
 			fAux.createNewFile();
 		}
-		
+
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		FileWriter aux = new FileWriter(fAux, true);
 
@@ -230,19 +230,18 @@ public class Utilidades {
 	public static HashMap<String, String> populateContacts() throws IOException {
 
 		HashMap<String, String> contacts = new HashMap<>();
-
+		BufferedReader br = null;
 		File file = new File("contacts.txt");
 		if (file.exists()) {
-			BufferedReader br = new BufferedReader(new FileReader(file));
+			br = new BufferedReader(new FileReader(file));
 
 			String st;
 			while ((st = br.readLine()) != null) {
 				String[] splitContact = st.split(":");
 				contacts.put(splitContact[0], splitContact[1]);
 			}
-			br.close();
 		}
-
+		br.close();
 		return contacts;
 	}
 
@@ -254,7 +253,7 @@ public class Utilidades {
 	 */
 	public static ArrayList<Warning> populateWarnings() throws IOException {
 		ArrayList<Warning> ArrayWarning = new ArrayList<>();
-		BufferedReader br;
+		BufferedReader br = null;
 		File r = new File("warning.txt");
 		if (r.exists()) {
 			try {
@@ -270,6 +269,7 @@ public class Utilidades {
 			}
 
 		}
+		br.close();
 		return ArrayWarning;
 	}
 

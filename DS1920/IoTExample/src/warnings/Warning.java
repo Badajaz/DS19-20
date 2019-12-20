@@ -12,8 +12,6 @@ import java.util.TimerTask;
 import com.bezirk.middleware.Bezirk;
 import com.bezirk.middleware.java.proxy.BezirkMiddleware;
 
-import i18n.I18N;
-import i18n.Messages;
 import utilidades.Utilidades;
 
 public class Warning {
