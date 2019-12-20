@@ -127,7 +127,6 @@ public class Warning {
 	}
 	
 	public void deleteWarningEvent(String mensagem, String dataInicio, String dataFim, String periodicidade) {
-		System.out.println("entrei1");
 		DeleteWarningEvento dwe = new DeleteWarningEvento(mensagem, dataInicio, dataFim, periodicidade);
 		b.sendEvent(dwe);
 	}

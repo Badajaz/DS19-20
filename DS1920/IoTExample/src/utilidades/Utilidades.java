@@ -51,6 +51,7 @@ public class Utilidades {
 		out.write(mensagem + " de " + dataInicio + " ate " + dataFim + " de " + periodicidade + " em " + periodicidade
 				+ " milissegundos ");
 		System.out.println(I18N.getString(Messages.WARNING_INSERT_SUCESSO));
+
 		out.newLine();
 		out.close();
 		fw.close();
@@ -76,33 +77,27 @@ public class Utilidades {
 		if (!fAux.exists()) {
 			fAux.createNewFile();
 		}
-
+		
+		BufferedReader br = new BufferedReader(new FileReader(f));
 		FileWriter aux = new FileWriter(fAux, true);
 
-		BufferedReader in = new BufferedReader(new FileReader(f));
 		String linha;
 		StringBuilder sb = new StringBuilder();
-		while ((linha = in.readLine()) != null) {
+		while ((linha = br.readLine()) != null) {
 			if (!linha.contains(mensagem)) {
 				sb.append(linha);
 				aux.write(sb.toString());
 				sb = new StringBuilder();
 				aux.write("\n");
 			} else {
-				//aux.write(sb.toString());
 				sb = new StringBuilder();
 			}
-			
 		}
 		System.out.println(I18N.getString(Messages.WARNING_DELETE_SUCESSO));
-		System.out.println("saí de tudo");
 
-		in.close();
-		System.out.println("fiz in.close");
+		br.close();
 		aux.close();
-		System.out.println("fiz aux.close");
 		Files.delete(f.toPath());
-		System.out.println("fiz f.topath delete");
 		fAux.renameTo(new File("warning.txt"));
 	}
 
@@ -141,7 +136,6 @@ public class Utilidades {
 		}
 
 		return true;
-
 	}
 
 	/**
