@@ -260,7 +260,9 @@ public class UI extends Thread {
 			} else if (input == 7) {
 				System.out.println(I18N.getString(Messages.GOODBYE));
 				acabou = true;
-				// TODO: fazer o acabar
+				
+				// acabar
+				System.exit(0);
 			}
 		}
 		sc.close();
