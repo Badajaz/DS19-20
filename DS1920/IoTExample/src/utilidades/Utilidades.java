@@ -84,16 +84,17 @@ public class Utilidades {
 		StringBuilder sb = new StringBuilder();
 		while ((linha = in.readLine()) != null) {
 			if (!linha.contains(mensagem)) {
-				sb.append(linha+"\n");
+				sb.append(linha);
 				aux.write(sb.toString());
 				sb = new StringBuilder();
-				System.out.println(I18N.getString(Messages.WARNING_DELETE_SUCESSO));
+				aux.write("\n");
 			} else {
-				aux.write(sb.toString());
+				//aux.write(sb.toString());
 				sb = new StringBuilder();
 			}
-			aux.write("\n");
+			
 		}
+		System.out.println(I18N.getString(Messages.WARNING_DELETE_SUCESSO));
 		System.out.println("saí de tudo");
 
 		in.close();
