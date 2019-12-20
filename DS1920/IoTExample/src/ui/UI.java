@@ -17,6 +17,10 @@ import contactos.Contacto;
 import contactos.ModificarContactoEvento;
 import i18n.I18N;
 import i18n.Messages;
+import inatividade.ActivatedInativityEvento;
+import inatividade.BeginningInativityEvento;
+import inatividade.Inatividade;
+import inatividade.InatividadeEvento;
 import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import sensors.LuzEvento;
@@ -44,6 +48,9 @@ public class UI extends Thread {
 		subs.add(ModificarContactoEvento.class);
 		subs.add(AdicionarWarningEvento.class);
 		subs.add(DeleteWarningEvento.class);
+		subs.add(InatividadeEvento.class);
+		subs.add(BeginningInativityEvento.class);
+		subs.add(ActivatedInativityEvento.class);
 		Class<? extends Event>[] array = toArray(subs);
 
 		final EventSet subscribedEvents = new EventSet(array);
@@ -84,7 +91,6 @@ public class UI extends Thread {
 			System.out.println(I18N.getString(Messages.OPT4));
 			System.out.println(I18N.getString(Messages.OPT5));
 			System.out.println(I18N.getString(Messages.OPT6));
-			System.out.println(I18N.getString(Messages.OPT7));
 			System.out.println(I18N.getString(Messages.QUIT));
 			input = sc.nextInt();
 
@@ -196,24 +202,7 @@ public class UI extends Thread {
 				Contacto c = new Contacto(nomeContacto, numContacto);
 				c.sendAddContactEvent();
 
-			} else if (input == 4) { // Criar padrao de inatividade
-				Scanner sc4 = new Scanner(System.in);
-				String duracao, horaInicio, horaFim;
-				System.out.println(I18N.getString(Messages.DURACAO));
-				duracao = sc4.nextLine();
-				System.out.println(I18N.getString(Messages.HORA_INICIAL));
-				horaInicio = sc4.nextLine();
-				System.out.println(I18N.getString(Messages.HORA_FINAL));
-				horaFim = sc4.nextLine();
-
-				try {
-					Utilidades.writePadraoInatividade(duracao, horaInicio, horaFim);
-					System.out.println(I18N.getString(Messages.PADRAO_INATIVIDADE_INSERT_SUCESSO));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			} else if (input == 5) { // Criar padrao de atividade
+			} else if (input == 4) { // Criar padrao de atividade
 				Scanner sc5 = new Scanner(System.in);
 
 				String divisao, horaInicio, horaFim;
@@ -233,10 +222,25 @@ public class UI extends Thread {
 					e.printStackTrace();
 				}
 
-			} else if (input == 6) { // Simular evento de inatividade
+			} else if (input == 5) { // Criar padrao de inatividade
 				Scanner sc6 = new Scanner(System.in);
 
-			} else if (input == 7) { // Modificar contacto
+				String duracao, horaInicial, horaFinal;
+				System.out.println(I18N.getString(Messages.DURACAO_INATIVIDADE));
+				duracao = sc6.nextLine();
+				System.out.println(I18N.getString(Messages.HORA_INICIAL));
+				horaInicial = sc6.nextLine();
+				System.out.println(I18N.getString(Messages.HORA_FINAL));
+				horaFinal = sc6.nextLine();
+				String periodo = "[" + horaInicial + "," + horaFinal + "]";
+				System.out.println("periodo ui: " + periodo);
+
+				// Criar um timer ate a duracao da inatividade. Quando for igual e dentro da
+				// hora, entao faz coisas.
+				Inatividade i = new Inatividade(duracao, periodo);
+				i.sendInactivityEvent();
+
+			} else if (input == 6) { // Modificar contacto
 				Scanner sc7 = new Scanner(System.in);
 				String nomeContacto, novoContacto;
 
@@ -253,7 +257,7 @@ public class UI extends Thread {
 				Contacto c = new Contacto(nomeContacto, novoContacto);
 				c.updateContactEvent();
 
-			} else if (input == 8) {
+			} else if (input == 7) {
 				System.out.println(I18N.getString(Messages.GOODBYE));
 				acabou = true;
 				// TODO: fazer o acabar

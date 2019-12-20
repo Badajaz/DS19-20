@@ -4,12 +4,6 @@ import com.bezirk.middleware.Bezirk;
 import com.bezirk.middleware.java.proxy.BezirkMiddleware;
 
 public class SensoresLuz {
-	/**
-	 * 
-	 * Criado automaticamente
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Bezirk b;
 
 	public SensoresLuz() {

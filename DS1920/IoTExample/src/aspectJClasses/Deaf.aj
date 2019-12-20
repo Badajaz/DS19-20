@@ -1,6 +1,7 @@
 package aspectJClasses;
 
 import contactos.Contacto;
+import inatividade.Inatividade;
 import sensors.SensorActividade;
 import sensors.SensorBotao;
 import sensors.SensoresLuz;
@@ -35,4 +36,12 @@ public aspect Deaf {
 		SensoresLuz luz = new SensoresLuz();
 		luz.sendLightEvent("contacto");
 	}
+	
+	pointcut emiteLuzInatividade() :  call(* *.println(*)) && within(Inatividade);
+
+	after(): emiteLuzInatividade(){
+		SensoresLuz luz = new SensoresLuz();
+		luz.sendLightEvent("inatividade");
+	}
+	
 }

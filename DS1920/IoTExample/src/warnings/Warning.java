@@ -20,12 +20,6 @@ public class Warning {
 	private String warningText;
 	private ArrayList<String> parameter;
 
-	/**
-	 * 
-	 * Criado automaticamente
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Bezirk b;
 
 	public Warning(String warningText) {
@@ -123,7 +117,7 @@ public class Warning {
 		AdicionarWarningEvento awe = new AdicionarWarningEvento(mensagem, dataInicio, dataFim, periodicidade);
 		b.sendEvent(awe);
 	}
-	
+
 	public void deleteWarningEvent(String mensagem, String dataInicio, String dataFim, String periodicidade) {
 		DeleteWarningEvento dwe = new DeleteWarningEvento(mensagem, dataInicio, dataFim, periodicidade);
 		b.sendEvent(dwe);

@@ -11,12 +11,6 @@ import i18n.Messages;
 
 public class SensorBotao {
 
-	/**
-	 * 
-	 * Criado automaticamente
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Bezirk b;
 
 	public SensorBotao() {

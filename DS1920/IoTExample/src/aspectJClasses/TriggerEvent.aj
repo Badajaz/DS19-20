@@ -10,6 +10,9 @@ import com.bezirk.middleware.messages.Event;
 
 import contactos.AdicionarContactoEvento;
 import contactos.ModificarContactoEvento;
+import inatividade.BeginningInativityEvento;
+import inatividade.Inatividade;
+import inatividade.InatividadeEvento;
 import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import utilidades.Utilidades;
@@ -121,5 +124,32 @@ public aspect TriggerEvent {
 				e1.printStackTrace();
 			}
 		}
+		
+		if (e instanceof InatividadeEvento) {
+			InatividadeEvento ie = (InatividadeEvento) e;
+			String duracao = ie.getDuracao();
+			String periodo = ie.getPeriodo();
+			try {
+				Utilidades.writePadraoInatividade(duracao, periodo);
+				Inatividade i = new Inatividade(duracao, periodo);
+				i.sendBeginingInactivity();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+		
+		if (e instanceof BeginningInativityEvento) {
+			try {
+				ArrayList<Inatividade>  inactivities = Utilidades.populateInactivities();
+				for(Inatividade i : inactivities) {
+					i.setTimerInactivity();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+
 	}
 }

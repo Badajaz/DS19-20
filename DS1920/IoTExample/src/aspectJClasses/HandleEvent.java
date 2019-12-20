@@ -8,6 +8,9 @@ import contactos.AdicionarContactoEvento;
 import contactos.ModificarContactoEvento;
 import i18n.I18N;
 import i18n.Messages;
+import inatividade.ActivatedInativityEvento;
+import inatividade.BeginningInativityEvento;
+import inatividade.InatividadeEvento;
 import sensors.ActividadeEvento;
 import sensors.BotaoEvento;
 import sensors.LuzEvento;
@@ -56,5 +59,17 @@ public class HandleEvent implements EventReceiver {
 		if (arg0 instanceof DeleteWarningEvento) {
 			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
 		}
+		
+		if (arg0 instanceof InatividadeEvento) {
+			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
+		}
+		if (arg0 instanceof BeginningInativityEvento) {
+			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
+			
+		}
+		if (arg0 instanceof ActivatedInativityEvento) {
+			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
+		}
+		
 	}
 }

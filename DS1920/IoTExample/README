@@ -1,7 +1,7 @@
 README:
 
 Produto 1 - Dispositivo Vestível com Monitor de Atividade para Cegos
--> Apply Build Configuration ao ficheiro DispositivoVestivelMonitorAtividade
+-> Apply Build Configuration ao ficheiro DispositivoVestivelMonitorAtividadeCegos
 -> Executar a classe Ui.java
 -> Executar a classe SensorActividade.java
 
@@ -10,12 +10,12 @@ Produto 2 - Dispositivo Vestível com Botão para Cegos
 -> Executar a classe Ui.java
 -> Executar a classe SensorBotao.java
 
-Produto 3- Monitor de Atividade com Lâmpadas para Surdos
+Produto 3 - Monitor de Atividade com Lâmpadas para Surdos
 ->
 ->
 ->
 
-Produto 4- Dispositivo Vestível com Botão para Surdos
+Produto 4 - Dispositivo Vestível com Botão para Surdos
 -> Apply Build Configuration ao ficheiro DispositivoVestivelFuncionalidadeBotaoSurdos
 -> Executar a classe Ui.java
 -> Executar a classe SensorBotao.java

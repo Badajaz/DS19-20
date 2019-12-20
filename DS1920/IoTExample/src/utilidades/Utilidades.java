@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 import i18n.I18N;
 import i18n.Messages;
+import inatividade.Inatividade;
 import warnings.Warning;
 
 public class Utilidades {
@@ -154,7 +155,7 @@ public class Utilidades {
 	 * @param horaFim    hora de fim da inatividade
 	 * @throws IOException
 	 */
-	public static void writePadraoInatividade(String duracao, String horaInicio, String horaFim) throws IOException {
+	public static void writePadraoInatividade(String duracao, String periodo) throws IOException {
 		File f = new File("inatividades.txt");
 		if (!f.exists()) {
 			f.createNewFile();
@@ -162,7 +163,8 @@ public class Utilidades {
 
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write("Inatividade durante " + duracao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
+		out.write("Inatividade durante " + duracao + " no periodo " + periodo);
+		System.out.println(I18N.getString(Messages.PADRAO_INATIVIDADE_INSERT_SUCESSO));
 		out.newLine();
 		out.close();
 		fw.close();
@@ -322,6 +324,10 @@ public class Utilidades {
 		System.out.println(I18N.getString(Messages.ACTIVIDADE_EVENT) + " - " + divisao + " - " + hora);
 	}
 
+	public static void printInActivityDetected(String divisao, String hora) {
+		System.out.println(I18N.getString(Messages.INACTIVIDADE_EVENT_DETECTADA));
+	}
+
 	/**
 	 * Atualiza o numero do contacto
 	 * 
@@ -411,5 +417,24 @@ public class Utilidades {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public static ArrayList<Inatividade> populateInactivities() throws IOException {
+		ArrayList<Inatividade> inactivities = new ArrayList<>();
+
+		File file = new File("inatividades.txt");
+		if (file.exists()) {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+
+			String st;
+			while ((st = br.readLine()) != null) {
+				String[] splitInactivity = st.split(" ");
+				inactivities.add(new Inatividade(splitInactivity[2], splitInactivity[5]));
+			}
+			br.close();
+		}
+
+		return inactivities;
+
 	}
 }
