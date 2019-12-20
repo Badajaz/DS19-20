@@ -36,5 +36,4 @@ public class SensorActividade {
 		b.sendEvent(ae);
 		System.out.println(I18N.getString(Messages.ACTIVIDADE_EVENT));
 	}
-
 }

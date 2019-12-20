@@ -212,11 +212,11 @@ public class UI extends Thread {
 				horaInicio = sc5.nextLine();
 				System.out.println(I18N.getString(Messages.HORA_FINAL));
 				horaFim = sc5.nextLine();
+				String periodo = "[" + horaInicio + "," + horaFim + "]";
 
 				try {
 					if (Utilidades.checkHour(horaInicio) && Utilidades.checkHour(horaFim)) {
-						Utilidades.writePadraoAtividade(divisao, horaInicio, horaFim);
-						System.out.println(I18N.getString(Messages.PADRAO_ATIVIDADE_INSERT_SUCESSO));
+						Utilidades.writePadraoAtividade(divisao, periodo);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -260,7 +260,7 @@ public class UI extends Thread {
 			} else if (input == 7) {
 				System.out.println(I18N.getString(Messages.GOODBYE));
 				acabou = true;
-				
+
 				// acabar
 				System.exit(0);
 			}

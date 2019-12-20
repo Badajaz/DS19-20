@@ -178,7 +178,7 @@ public class Utilidades {
 	 * @param horaFim    hora de fim
 	 * @throws IOException
 	 */
-	public static void writePadraoAtividade(String divisao, String horaInicio, String horaFim) throws IOException {
+	public static void writePadraoAtividade(String divisao, String periodo) throws IOException {
 		File f = new File("atividades.txt");
 		if (!f.exists()) {
 			f.createNewFile();
@@ -186,7 +186,8 @@ public class Utilidades {
 
 		FileWriter fw = new FileWriter(f, true);
 		BufferedWriter out = new BufferedWriter(fw);
-		out.write("Detecao de atividade na " + divisao + " no periodo " + "[" + horaInicio + "," + horaFim + "]");
+		out.write("Detecao de atividade na " + divisao + " no periodo " + periodo);
+		System.out.println(I18N.getString(Messages.PADRAO_ATIVIDADE_INSERT_SUCESSO));
 		out.newLine();
 		out.close();
 		fw.close();
