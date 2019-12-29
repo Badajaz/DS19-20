@@ -11,9 +11,10 @@ Produto 2 - Dispositivo Vestível com Botão para Cegos
 -> Executar a classe SensorBotao.java
 
 Produto 3 - Monitor de Atividade com Lâmpadas para Surdos
-->
-->
-->
+-> Apply Build Configuration ao deaf.aj
+-> Apply Build Configuration ao DispositivoVestivelMonitorAtividadeCegos
+-> Executar a classe UI.java
+-> Executar a classe SensorActividade.java
 
 Produto 4 - Dispositivo Vestível com Botão para Surdos
 -> Apply Build Configuration ao ficheiro DispositivoVestivelFuncionalidadeBotaoSurdos
