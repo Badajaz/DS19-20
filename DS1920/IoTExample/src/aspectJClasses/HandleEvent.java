@@ -55,21 +55,21 @@ public class HandleEvent implements EventReceiver {
 		if (arg0 instanceof AdicionarWarningEvento) {
 			System.err.println(I18N.getString(Messages.ADD_WARNING_EVENT));
 		}
-		
+
 		if (arg0 instanceof DeleteWarningEvento) {
 			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
 		}
-		
+
 		if (arg0 instanceof InatividadeEvento) {
-			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
+			System.err.println(I18N.getString(Messages.INACTIVIDADE_EVENT));
 		}
 		if (arg0 instanceof BeginningInativityEvento) {
-			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
-			
+			System.err.println(I18N.getString(Messages.BEGIN_INACTIVIDADE_EVENT));
+
 		}
 		if (arg0 instanceof ActivatedInativityEvento) {
-			System.err.println(I18N.getString(Messages.DEL_WARNING_EVENT));
+			System.err.println(I18N.getString(Messages.INACTIVIDADE_EVENT_DETECTADA));
 		}
-		
+
 	}
 }

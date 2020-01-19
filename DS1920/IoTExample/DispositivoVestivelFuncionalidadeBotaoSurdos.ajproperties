@@ -1,4 +1,4 @@
 src.includes = src/
 src.excludes = src/aspectJClasses/Cegos.aj,\
-			   src/i18n/pt_PT.aj,\
-			   src/i18n/Messages_pt_PT.properties
+			   src/i18n/en_US.aj,\
+			   src/i18n/Messages_en_US.properties

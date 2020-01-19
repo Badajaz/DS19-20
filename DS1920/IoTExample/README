@@ -15,6 +15,7 @@ Produto 3 - Monitor de Atividade com Lâmpadas para Surdos
 -> Apply Build Configuration ao DispositivoVestivelMonitorAtividadeCegos
 -> Executar a classe UI.java
 -> Executar a classe SensorActividade.java
+-> Criar uma inatividade com 1 min a menos do tempo normal.
 
 Produto 4 - Dispositivo Vestível com Botão para Surdos
 -> Apply Build Configuration ao ficheiro DispositivoVestivelFuncionalidadeBotaoSurdos

@@ -38,11 +38,9 @@ public class Inatividade {
 				public void run() {
 
 					if (minuteCounter == Integer.parseInt(duracao)) {
-						System.out.println("enviar send activated inactivity");
 						sendActivatedInactivity();
 						minuteCounter = 0;
 					}
-					System.out.println("minute counter : " + minuteCounter);
 					minuteCounter++;
 
 					try {
@@ -63,6 +61,7 @@ public class Inatividade {
 		Date horaActual = new Date();
 		SimpleDateFormat actual = new SimpleDateFormat("HH:mm");
 		if (!Utilidades.CheckActivityPeriod(actual.format(horaActual), periodo)) {
+			System.out.println("Cancelando...");
 			t.cancel();
 		}
 	}

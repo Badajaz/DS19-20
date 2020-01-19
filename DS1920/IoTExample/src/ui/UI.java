@@ -233,7 +233,6 @@ public class UI extends Thread {
 				System.out.println(I18N.getString(Messages.HORA_FINAL));
 				horaFinal = sc6.nextLine();
 				String periodo = "[" + horaInicial + "," + horaFinal + "]";
-				System.out.println("periodo ui: " + periodo);
 
 				// Criar um timer ate a duracao da inatividade. Quando for igual e dentro da
 				// hora, entao faz coisas.

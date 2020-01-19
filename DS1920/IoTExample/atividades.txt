@@ -1,2 +1,2 @@
-Detecao de atividade na Cozinha no periodo [18:00,20:00]
-Detecao de atividade na Cozinha no periodo [13:00,17:00]
+Detecao de atividade na Cozinha no periodo [17:25,19:35]
+Detecao de atividade na Quarto no periodo [19:39,19:50]

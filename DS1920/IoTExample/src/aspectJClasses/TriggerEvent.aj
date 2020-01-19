@@ -51,7 +51,7 @@ public aspect TriggerEvent {
 				Warning warning = new Warning(mensagem + " de " + dataInicio + " ate " + dataFim + " de "
 						+ periodicidade + " em " + periodicidade + " milissegundos ");
 				warning.sendWarningEvent();
-				
+
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -66,7 +66,7 @@ public aspect TriggerEvent {
 			periodicidade = dwe.getPeriodicidade();
 			try {
 				Utilidades.deleteWarning(mensagem, dataInicio, dataFim, periodicidade);
-				
+
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -124,7 +124,7 @@ public aspect TriggerEvent {
 				e1.printStackTrace();
 			}
 		}
-		
+
 		if (e instanceof InatividadeEvento) {
 			InatividadeEvento ie = (InatividadeEvento) e;
 			String duracao = ie.getDuracao();
@@ -138,17 +138,17 @@ public aspect TriggerEvent {
 			}
 
 		}
-		
+
 		if (e instanceof BeginningInativityEvento) {
 			try {
-				ArrayList<Inatividade>  inactivities = Utilidades.populateInactivities();
-				for(Inatividade i : inactivities) {
+				ArrayList<Inatividade> inactivities = Utilidades.populateInactivities();
+				for (Inatividade i : inactivities) {
 					i.setTimerInactivity();
 				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			
+
 		}
 
 	}
